@@ -1,5 +1,5 @@
 //
-//  PopularRecipesCollectionView.swift
+//  SavedRecipesCollectionView.swift
 //  CookBook
 //
 //  Created by Veronica Rudiuk on 29.11.22.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        
+final class SavedRecipesCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -16,7 +16,7 @@ final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDele
         
         delegate = self
         dataSource = self
-        register(PopularRecipesCell.self, forCellWithReuseIdentifier: PopularRecipesCell.reusedID)
+        register(SavedRecipesCell.self, forCellWithReuseIdentifier: SavedRecipesCell.reusedID)
         
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -27,13 +27,13 @@ final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = dequeueReusableCell(withReuseIdentifier: PopularRecipesCell.reusedID, for: indexPath)
+        let cell = dequeueReusableCell(withReuseIdentifier: SavedRecipesCell.reusedID, for: indexPath)
         return cell
     }
     
 //    устанавливаю размер ячейки
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 280, height: 240)
+        return CGSize(width: 124, height: 190)
     }
     
     required init?(coder: NSCoder) {
