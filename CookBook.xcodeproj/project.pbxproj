@@ -15,7 +15,6 @@
 		58CD82EF293635F100B9777C /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CD82EE293635F100B9777C /* Poppins-Regular.ttf */; };
 		58DA3E2729350C8900AB3EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA3E2629350C8900AB3EFF /* AppDelegate.swift */; };
 		58DA3E2929350C8900AB3EFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */; };
-		58DA3E2E29350C8900AB3EFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58DA3E2C29350C8900AB3EFF /* Main.storyboard */; };
 		58DA3E3029350C8B00AB3EFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */; };
 		58DA3E3329350C8B00AB3EFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -30,7 +29,6 @@
 		58DA3E2329350C8900AB3EFF /* CookBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58DA3E2629350C8900AB3EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		58DA3E2D29350C8900AB3EFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58DA3E3229350C8B00AB3EFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58DA3E3429350C8B00AB3EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,14 +100,13 @@
 		58DA3E2529350C8900AB3EFF /* CookBook */ = {
 			isa = PBXGroup;
 			children = (
-				58DA3E3429350C8B00AB3EFF /* Info.plist */,
-				58CD82EB2936354700B9777C /* Fonts */,
-				58CD82EA293631C400B9777C /* ApplicationLayer */,
-				58DA3E2C29350C8900AB3EFF /* Main.storyboard */,
-				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
 				58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */,
+				58CD82EA293631C400B9777C /* ApplicationLayer */,
 				5875CED52936149D00983465 /* HomePage */,
 				5875CEDC293618D800983465 /* LogoAndSearchView */,
+				58CD82EB2936354700B9777C /* Fonts */,
+				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
+				58DA3E3429350C8B00AB3EFF /* Info.plist */,
 			);
 			path = CookBook;
 			sourceTree = "<group>";
@@ -177,7 +174,6 @@
 				58CD82EF293635F100B9777C /* Poppins-Regular.ttf in Resources */,
 				58DA3E3029350C8B00AB3EFF /* Assets.xcassets in Resources */,
 				58CD82ED2936355E00B9777C /* Poppins-SemiBold.ttf in Resources */,
-				58DA3E2E29350C8900AB3EFF /* Main.storyboard in Resources */,
 				5875CED42936148F00983465 /* HomePage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,14 +195,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		58DA3E2C29350C8900AB3EFF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				58DA3E2D29350C8900AB3EFF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -344,7 +332,6 @@
 				INFOPLIST_FILE = CookBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -371,7 +358,6 @@
 				INFOPLIST_FILE = CookBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
