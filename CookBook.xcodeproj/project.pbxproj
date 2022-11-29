@@ -11,6 +11,8 @@
 		5875CED42936148F00983465 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5875CED22936148F00983465 /* HomePage.xib */; };
 		5875CED92936188E00983465 /* LogoAndSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5875CED82936188E00983465 /* LogoAndSearchView.swift */; };
 		58C28DE12936195A00CD8604 /* LogoAndSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C28DE02936195A00CD8604 /* LogoAndSearchView.xib */; };
+		58CD82ED2936355E00B9777C /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CD82EC2936355E00B9777C /* Poppins-SemiBold.ttf */; };
+		58CD82EF293635F100B9777C /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CD82EE293635F100B9777C /* Poppins-Regular.ttf */; };
 		58DA3E2729350C8900AB3EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA3E2629350C8900AB3EFF /* AppDelegate.swift */; };
 		58DA3E2929350C8900AB3EFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */; };
 		58DA3E2E29350C8900AB3EFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58DA3E2C29350C8900AB3EFF /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 		5875CED22936148F00983465 /* HomePage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePage.xib; sourceTree = "<group>"; };
 		5875CED82936188E00983465 /* LogoAndSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAndSearchView.swift; sourceTree = "<group>"; };
 		58C28DE02936195A00CD8604 /* LogoAndSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoAndSearchView.xib; sourceTree = "<group>"; };
+		58CD82EC2936355E00B9777C /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		58CD82EE293635F100B9777C /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		58DA3E2329350C8900AB3EFF /* CookBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58DA3E2629350C8900AB3EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,9 +70,17 @@
 			children = (
 				58DA3E2629350C8900AB3EFF /* AppDelegate.swift */,
 				58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */,
-				58DA3E3429350C8B00AB3EFF /* Info.plist */,
 			);
 			path = ApplicationLayer;
+			sourceTree = "<group>";
+		};
+		58CD82EB2936354700B9777C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				58CD82EC2936355E00B9777C /* Poppins-SemiBold.ttf */,
+				58CD82EE293635F100B9777C /* Poppins-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		58DA3E1A29350C8800AB3EFF = {
@@ -90,6 +102,8 @@
 		58DA3E2529350C8900AB3EFF /* CookBook */ = {
 			isa = PBXGroup;
 			children = (
+				58DA3E3429350C8B00AB3EFF /* Info.plist */,
+				58CD82EB2936354700B9777C /* Fonts */,
 				58CD82EA293631C400B9777C /* ApplicationLayer */,
 				58DA3E2C29350C8900AB3EFF /* Main.storyboard */,
 				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
@@ -160,7 +174,9 @@
 			files = (
 				58C28DE12936195A00CD8604 /* LogoAndSearchView.xib in Resources */,
 				58DA3E3329350C8B00AB3EFF /* LaunchScreen.storyboard in Resources */,
+				58CD82EF293635F100B9777C /* Poppins-Regular.ttf in Resources */,
 				58DA3E3029350C8B00AB3EFF /* Assets.xcassets in Resources */,
+				58CD82ED2936355E00B9777C /* Poppins-SemiBold.ttf in Resources */,
 				58DA3E2E29350C8900AB3EFF /* Main.storyboard in Resources */,
 				5875CED42936148F00983465 /* HomePage.xib in Resources */,
 			);
