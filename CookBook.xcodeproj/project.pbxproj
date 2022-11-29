@@ -75,15 +75,6 @@
 			path = SavedRecipes;
 			sourceTree = "<group>";
 		};
-		58CD82EA293631C400B9777C /* ApplicationLayer */ = {
-			isa = PBXGroup;
-			children = (
-				58DA3E2629350C8900AB3EFF /* AppDelegate.swift */,
-				58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */,
-			);
-			path = ApplicationLayer;
-			sourceTree = "<group>";
-		};
 		58CD82EB2936354700B9777C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,7 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */,
-				58CD82EA293631C400B9777C /* ApplicationLayer */,
+				58DA3E2629350C8900AB3EFF /* AppDelegate.swift */,
+				58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */,
 				5875CED52936149D00983465 /* HomePage */,
 				58CD82EB2936354700B9777C /* Fonts */,
 				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
