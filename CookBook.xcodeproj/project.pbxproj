@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5875CED32936148F00983465 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5875CED12936148F00983465 /* HomePage.swift */; };
-		5875CED92936188E00983465 /* LogoAndSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5875CED82936188E00983465 /* LogoAndSearchView.swift */; };
 		58A4EE1D29364B5D00FE17B9 /* PopularRecipesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A4EE1C29364B5D00FE17B9 /* PopularRecipesCollectionView.swift */; };
 		58A4EE1F29364FD100FE17B9 /* PopularRecipesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A4EE1E29364FD100FE17B9 /* PopularRecipesCell.swift */; };
 		58A4EE23293666F100FE17B9 /* SavedRecipesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A4EE22293666F100FE17B9 /* SavedRecipesCollectionView.swift */; };
 		58A4EE252936676A00FE17B9 /* SavedRecipesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A4EE242936676A00FE17B9 /* SavedRecipesCell.swift */; };
-		58C28DE12936195A00CD8604 /* LogoAndSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C28DE02936195A00CD8604 /* LogoAndSearchView.xib */; };
 		58CD82ED2936355E00B9777C /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CD82EC2936355E00B9777C /* Poppins-SemiBold.ttf */; };
 		58CD82EF293635F100B9777C /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CD82EE293635F100B9777C /* Poppins-Regular.ttf */; };
 		58DA3E2729350C8900AB3EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DA3E2629350C8900AB3EFF /* AppDelegate.swift */; };
@@ -24,12 +22,10 @@
 
 /* Begin PBXFileReference section */
 		5875CED12936148F00983465 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
-		5875CED82936188E00983465 /* LogoAndSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAndSearchView.swift; sourceTree = "<group>"; };
 		58A4EE1C29364B5D00FE17B9 /* PopularRecipesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRecipesCollectionView.swift; sourceTree = "<group>"; };
 		58A4EE1E29364FD100FE17B9 /* PopularRecipesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRecipesCell.swift; sourceTree = "<group>"; };
 		58A4EE22293666F100FE17B9 /* SavedRecipesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesCollectionView.swift; sourceTree = "<group>"; };
 		58A4EE242936676A00FE17B9 /* SavedRecipesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesCell.swift; sourceTree = "<group>"; };
-		58C28DE02936195A00CD8604 /* LogoAndSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoAndSearchView.xib; sourceTree = "<group>"; };
 		58CD82EC2936355E00B9777C /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		58CD82EE293635F100B9777C /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		58DA3E2329350C8900AB3EFF /* CookBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,15 +55,6 @@
 				5875CED12936148F00983465 /* HomePage.swift */,
 			);
 			path = HomePage;
-			sourceTree = "<group>";
-		};
-		5875CEDC293618D800983465 /* LogoAndSearchView */ = {
-			isa = PBXGroup;
-			children = (
-				5875CED82936188E00983465 /* LogoAndSearchView.swift */,
-				58C28DE02936195A00CD8604 /* LogoAndSearchView.xib */,
-			);
-			path = LogoAndSearchView;
 			sourceTree = "<group>";
 		};
 		58A4EE202936610300FE17B9 /* PopularRecipes */ = {
@@ -128,7 +115,6 @@
 				58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */,
 				58CD82EA293631C400B9777C /* ApplicationLayer */,
 				5875CED52936149D00983465 /* HomePage */,
-				5875CEDC293618D800983465 /* LogoAndSearchView */,
 				58CD82EB2936354700B9777C /* Fonts */,
 				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
 				58DA3E3429350C8B00AB3EFF /* Info.plist */,
@@ -194,7 +180,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58C28DE12936195A00CD8604 /* LogoAndSearchView.xib in Resources */,
 				58DA3E3329350C8B00AB3EFF /* LaunchScreen.storyboard in Resources */,
 				58CD82EF293635F100B9777C /* Poppins-Regular.ttf in Resources */,
 				58DA3E3029350C8B00AB3EFF /* Assets.xcassets in Resources */,
@@ -209,7 +194,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5875CED92936188E00983465 /* LogoAndSearchView.swift in Sources */,
 				58A4EE23293666F100FE17B9 /* SavedRecipesCollectionView.swift in Sources */,
 				58A4EE1D29364B5D00FE17B9 /* PopularRecipesCollectionView.swift in Sources */,
 				58A4EE1F29364FD100FE17B9 /* PopularRecipesCell.swift in Sources */,
