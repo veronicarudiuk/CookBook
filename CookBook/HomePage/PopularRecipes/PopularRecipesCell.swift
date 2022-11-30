@@ -35,7 +35,7 @@ final class PopularRecipesCell: UICollectionViewCell {
     
     let categorieTitle: UILabel = {
         let label = UILabel()
-//        label.text = "no category"
+        label.text = "no category"
         label.textColor = UIColor(named: "GrayTextColor")
         label.font = UIFont(name: "Poppins Regular", size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false

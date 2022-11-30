@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDelegate {
     
@@ -41,12 +42,21 @@ extension PopularRecipesCollectionView: UICollectionViewDataSource {
         cell.recipeTitle.text = cells[indexPath.row].title
         
         if let dishesTypes = cells[indexPath.row].dishTypes {
-            let stringDishTypes = dishesTypes.joined(separator: ", ")
-            cell.categorieTitle.text = stringDishTypes
-        } else {
-            cell.categorieTitle.text = "no category"
+            if dishesTypes != [] {
+                let stringDishTypes = dishesTypes.joined(separator: ", ")
+                cell.categorieTitle.text = stringDishTypes
+            } else {
+                cell.categorieTitle.text = "no category"
+            }
         }
         
+        if let recipeImageUrl = cells[indexPath.row].image {
+        let url = URL(string: recipeImageUrl)
+        let processor = RoundCornerImageProcessor(cornerRadius: 10)
+            cell.mainImageView.kf.setImage(with: url, options: [.processor(processor)])
+        } else {
+            cell.mainImageView.image = #imageLiteral(resourceName: "mealDefaultBackgroundOne")
+        }
         
         return cell
     }
