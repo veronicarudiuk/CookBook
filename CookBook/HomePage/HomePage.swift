@@ -41,14 +41,21 @@ class HomePage: UIViewController {
         return label
     }()
     
+    var recipeNetworkManager = RecipeNetworkManager()
+    
     private var popularRecipesCollecrionView = PopularRecipesCollectionView()
     
     private var savedRecipesCollectionView = SavedRecipesCollectionView()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.recipeNetworkManager.delegate = self
+        self.recipeNetworkManager.getRecipes(.random)
+        
         view.backgroundColor = .white
-
+        
         view.addSubview(mainTitle)
         view.addSubview(logoImage)
         view.addSubview(popularRecipesTitle)
@@ -57,9 +64,8 @@ class HomePage: UIViewController {
         view.addSubview(savedRecipesCollectionView)
         
         setAnchors()
-    
     }
-
+    
     func setAnchors() {
         
         mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
@@ -87,5 +93,18 @@ class HomePage: UIViewController {
         savedRecipesCollectionView.topAnchor.constraint(equalTo: savedRecipesTitle.bottomAnchor, constant: 16).isActive = true
         savedRecipesCollectionView.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
+}
 
+//MARK: - RecipeNetworkManagerDelegate
+extension HomePage: RecipeNetworkManagerDelegate {
+    func RecipesDidRecive(_ dataFromApi: RecipeData) {
+        self.popularRecipesCollecrionView.cells = dataFromApi.recipes
+        DispatchQueue.main.async {
+            self.popularRecipesCollecrionView.reloadData()
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
 }

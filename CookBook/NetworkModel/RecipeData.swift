@@ -15,11 +15,12 @@ extension RecipeData {
     struct RecipeDescription: Decodable {
         let id: Int
         let title: String
-        let image: String
+        let image: String?
         let instructions: String
         let readyInMinutes: Int
         let servings: Int
         let extendedIngredients: [Ingredients]
+        let dishTypes: [String]?
     }
     
     
