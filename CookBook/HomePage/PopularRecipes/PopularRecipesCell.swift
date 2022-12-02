@@ -12,7 +12,7 @@ final class PopularRecipesCell: UICollectionViewCell {
     static let reusedID = "PopularRecipesCell"
     var savedRecipesModel = SavedRecipesModel()
     var recipeData = [RecipeData.RecipeDescription]()
-    private var savedRecipesCollectionView = SavedRecipesCollectionView()
+    private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()

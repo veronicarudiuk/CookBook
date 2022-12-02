@@ -9,6 +9,8 @@ import UIKit
 
 final class SavedRecipesCollectionView: UICollectionView, UICollectionViewDelegate {
     
+    static let shared = SavedRecipesCollectionView()
+    
     var savedRecipesModel = SavedRecipesModel()
     
     init() {
@@ -33,7 +35,7 @@ final class SavedRecipesCollectionView: UICollectionView, UICollectionViewDelega
 extension SavedRecipesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        обновить когда будет модель
-        return 1
+        savedRecipesModel.getSavedRecipesList().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,7 +43,7 @@ extension SavedRecipesCollectionView: UICollectionViewDataSource {
         
         let savedRecipesList = savedRecipesModel.getSavedRecipesList()
         if savedRecipesList.isEmpty { return cell } else {
-            print(savedRecipesList[indexPath.row].title)
+            cell.recipeTitle.text  = savedRecipesList[indexPath.row].title
         }
         return cell
     }

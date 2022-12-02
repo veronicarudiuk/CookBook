@@ -43,7 +43,7 @@ class HomePage: UIViewController {
     
     private var popularRecipesCollecrionView = PopularRecipesCollectionView()
     
-    private var savedRecipesCollectionView = SavedRecipesCollectionView()
+    private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
     
     override func viewDidLoad() {
