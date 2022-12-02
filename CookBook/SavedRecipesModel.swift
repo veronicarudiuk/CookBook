@@ -9,19 +9,22 @@ import Foundation
 
 struct SavedRecipesModel {
     
-    static var savedRecipes = [716429]
+    static var savedRecipes = [RecipeData.RecipeDescription]()
     
-    mutating func saveNewRecipe(id: Int) {
-        SavedRecipesModel.savedRecipes.append(id)
-    }
-    
-    mutating func deleteRecipeFromSaved(id: Int) {
-        if let index = SavedRecipesModel.savedRecipes.firstIndex(of: id) {
-            SavedRecipesModel.savedRecipes.remove(at: index)
+    mutating func saveNewRecipe(_ recipeData: [RecipeData.RecipeDescription]) {
+        if SavedRecipesModel.savedRecipes.isEmpty {
+            SavedRecipesModel.savedRecipes = [recipeData[0]]
+        } else {
+            SavedRecipesModel.savedRecipes.append(recipeData[0])
         }
     }
+    //    mutating func deleteRecipeFromSaved(id: RecipeData.RecipeDescription) {
+    //        if let index = SavedRecipesModel.savedRecipes.firstIndex(of: id) {
+    //            SavedRecipesModel.savedRecipes.remove(at: index)
+    //        }
+    //    }
     
-    func getSavedRecipesList() -> [Int] {
+    func getSavedRecipesList() -> [RecipeData.RecipeDescription] {
         SavedRecipesModel.savedRecipes
     }
 }

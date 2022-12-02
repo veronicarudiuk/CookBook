@@ -11,7 +11,8 @@ final class PopularRecipesCell: UICollectionViewCell {
     
     static let reusedID = "PopularRecipesCell"
     var savedRecipesModel = SavedRecipesModel()
-    var recipeID = 0
+    var recipeData = [RecipeData.RecipeDescription]()
+    private var savedRecipesCollectionView = SavedRecipesCollectionView()
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
@@ -84,12 +85,15 @@ final class PopularRecipesCell: UICollectionViewCell {
     @objc func keyPressed(_ sender: UIButton) {
         if sender.currentImage == UIImage(named: "SaveInactive") {
             sender.setImage(UIImage(named: "SaveActive"), for: .normal)
-            savedRecipesModel.saveNewRecipe(id: recipeID)
-            print(savedRecipesModel.getSavedRecipesList())
+            savedRecipesModel.saveNewRecipe(recipeData)
+            print(savedRecipesModel.getSavedRecipesList().count)
+            DispatchQueue.main.async {
+                self.savedRecipesCollectionView.reloadData()
+            }
         } else {
             sender.setImage(UIImage(named: "SaveInactive"), for: .normal)
-            savedRecipesModel.deleteRecipeFromSaved(id: recipeID)
-            print(savedRecipesModel.getSavedRecipesList())
+//            savedRecipesModel.deleteRecipeFromSaved(recipeData: recipeData)
+//            print(savedRecipesModel.getSavedRecipesList())
         }
     }
     

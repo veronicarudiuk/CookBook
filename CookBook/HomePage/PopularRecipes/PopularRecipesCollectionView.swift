@@ -44,7 +44,8 @@ extension PopularRecipesCollectionView: UICollectionViewDataSource {
         let cell = dequeueReusableCell(withReuseIdentifier: PopularRecipesCell.reusedID, for: indexPath) as! PopularRecipesCell
         
         cell.recipeTitle.text = cells[indexPath.row].title
-        cell.recipeID = cells[indexPath.row].id
+        cell.recipeData = [cells[indexPath.row]]
+//        print(cell.recipeData)
         
         if let dishesTypes = cells[indexPath.row].dishTypes {
             if dishesTypes != [] {

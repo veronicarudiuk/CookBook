@@ -9,6 +9,8 @@ import UIKit
 
 final class SavedRecipesCollectionView: UICollectionView, UICollectionViewDelegate {
     
+    var savedRecipesModel = SavedRecipesModel()
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -31,12 +33,16 @@ final class SavedRecipesCollectionView: UICollectionView, UICollectionViewDelega
 extension SavedRecipesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        обновить когда будет модель
-        return 10
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = dequeueReusableCell(withReuseIdentifier: SavedRecipesCell.reusedID, for: indexPath)
+        let cell = dequeueReusableCell(withReuseIdentifier: SavedRecipesCell.reusedID, for: indexPath) as! SavedRecipesCell
         
+        let savedRecipesList = savedRecipesModel.getSavedRecipesList()
+        if savedRecipesList.isEmpty { return cell } else {
+            print(savedRecipesList[indexPath.row].title)
+        }
         return cell
     }
 }
