@@ -8,13 +8,17 @@
 import UIKit
 
 class RecipeListViewController: UIViewController {
+    
     var recipeNetworkManager = RecipeNetworkManager()
-    let tableView: UITableView = .init()
     var dataApi = [RecipeData.RecipeDescription]()
+    
+    let tableView: UITableView = .init()
+    
     let mainTitle: UILabel = {
         let label = UILabel()
-        label.text = "Get amazing recipes for cooking"
+        label.text = "Main course"
         label.numberOfLines = 2
+        label.textAlignment = .center
         label.font = UIFont(name: "Poppins SemiBold", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -23,6 +27,7 @@ class RecipeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupTableView()
         tableView.register(RecipeTableCell.self, forCellReuseIdentifier: "RecipeTableCell")
         tableView.dataSource = self
@@ -30,11 +35,10 @@ class RecipeListViewController: UIViewController {
         recipeNetworkManager.delegate = self
         recipeNetworkManager.getRecipes(.random)
         
-        
         view.addSubview(mainTitle)
-        mainTitle.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
+            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 76),
             mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
             mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
         ])
@@ -43,56 +47,54 @@ class RecipeListViewController: UIViewController {
 }
 
 extension RecipeListViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableCell", for: indexPath) as? RecipeTableCell else { fatalError() }
         if dataApi.count > 0 {
             cell.titleLabel.text = dataApi[indexPath.row].title
-            cell.infoLabel.text = "Information"
-            
+            cell.ingredientsLabel.text = "9 Ingredients"
+            cell.timeLabel.text = "25 min"
+
             guard let apiURL = URL(string: dataApi[indexPath.row].image) else { return cell }
             URLSession.shared.dataTask(with: apiURL) { data, _, _ in
                 guard let data = data else { return }
                 DispatchQueue.main.async {
-                    cell.imageCell.image = UIImage(data: data)                    }
+                    cell.imageCell.image = UIImage(data: data)
+//                    cell.imageCell.layer.cornerRadius = 10
+//                    cell.imageCell.layer.masksToBounds = true
+                }
             } .resume()
-            
+
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
 }
 
 extension RecipeListViewController: UITableViewDelegate {
-    
+
 }
 
 extension RecipeListViewController {
     func setupTableView() {
         view.addSubview(tableView)
-        view.addSubview(mainTitle)
 
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        mainTitle.translatesAutoresizingMaskIntoConstraints = false
-        
-        
+
+
         NSLayoutConstraint.activate([
-            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
-            mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
-            mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
-            
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 66),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor,constant: 68),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
