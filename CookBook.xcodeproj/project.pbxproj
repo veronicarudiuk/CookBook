@@ -26,6 +26,7 @@
 		AAB09CBD293A090F00DFFF34 /* MealTypesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CBC293A090F00DFFF34 /* MealTypesVC.swift */; };
 		AAB09CC0293A096000DFFF34 /* MealTypesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CBF293A096000DFFF34 /* MealTypesCollectionView.swift */; };
 		AAB09CC2293A098600DFFF34 /* MealTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CC1293A098600DFFF34 /* MealTypeCell.swift */; };
+		AAB09CC6293A622300DFFF34 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CC5293A622300DFFF34 /* TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		AAB09CBC293A090F00DFFF34 /* MealTypesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypesVC.swift; sourceTree = "<group>"; };
 		AAB09CBF293A096000DFFF34 /* MealTypesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypesCollectionView.swift; sourceTree = "<group>"; };
 		AAB09CC1293A098600DFFF34 /* MealTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypeCell.swift; sourceTree = "<group>"; };
+		AAB09CC5293A622300DFFF34 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				58CD82EB2936354700B9777C /* Fonts */,
 				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
 				58DA3E3429350C8B00AB3EFF /* Info.plist */,
+				AAB09CC5293A622300DFFF34 /* TabBar.swift */,
 			);
 			path = CookBook;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				58A4EE23293666F100FE17B9 /* SavedRecipesCollectionView.swift in Sources */,
 				AAB09CBB293A04F500DFFF34 /* MealTypesData.swift in Sources */,
 				58A4EE1D29364B5D00FE17B9 /* PopularRecipesCollectionView.swift in Sources */,
+				AAB09CC6293A622300DFFF34 /* TabBar.swift in Sources */,
 				AAB09CBD293A090F00DFFF34 /* MealTypesVC.swift in Sources */,
 				58A4EE1F29364FD100FE17B9 /* PopularRecipesCell.swift in Sources */,
 				58DA3E2729350C8900AB3EFF /* AppDelegate.swift in Sources */,
