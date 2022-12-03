@@ -43,12 +43,13 @@ class HomePage: UIViewController {
     
     private var popularRecipesCollecrionView = PopularRecipesCollectionView()
     
-    private var savedRecipesCollectionView = SavedRecipesCollectionView()
+    private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
-
+        
         view.addSubview(mainTitle)
         view.addSubview(logoImage)
         view.addSubview(popularRecipesTitle)
@@ -57,9 +58,8 @@ class HomePage: UIViewController {
         view.addSubview(savedRecipesCollectionView)
         
         setAnchors()
-    
     }
-
+    
     func setAnchors() {
         
         mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
@@ -87,5 +87,4 @@ class HomePage: UIViewController {
         savedRecipesCollectionView.topAnchor.constraint(equalTo: savedRecipesTitle.bottomAnchor, constant: 16).isActive = true
         savedRecipesCollectionView.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
-
 }
