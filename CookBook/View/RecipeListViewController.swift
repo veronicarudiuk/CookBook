@@ -59,16 +59,15 @@ extension RecipeListViewController: UITableViewDataSource {
             cell.ingredientsLabel.text = "\(dataApi[indexPath.row].extendedIngredients.count) Ingredients"
             cell.timeLabel.text = "\(dataApi[indexPath.row].readyInMinutes) min"
 
-            guard let apiURL = URL(string: dataApi[indexPath.row].image) else { return cell }
-            URLSession.shared.dataTask(with: apiURL) { data, _, _ in
-                guard let data = data else { return }
-                DispatchQueue.main.async {
-                    cell.imageCell.image = UIImage(data: data)
-//                    cell.imageCell.layer.cornerRadius = 10
-//                    cell.imageCell.layer.masksToBounds = true
-                }
-            } .resume()
-
+            if let dishImage = dataApi[indexPath.row].image {
+                guard let apiURL = URL(string: dishImage) else { return cell }
+                URLSession.shared.dataTask(with: apiURL) { data, _, _ in
+                    guard let data = data else { return }
+                    DispatchQueue.main.async {
+                        cell.imageCell.image = UIImage(data: data)
+                    }
+                } .resume()
+            }
         }
         return cell
     }
