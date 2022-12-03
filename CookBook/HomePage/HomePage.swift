@@ -45,7 +45,6 @@ class HomePage: UIViewController {
     
     private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

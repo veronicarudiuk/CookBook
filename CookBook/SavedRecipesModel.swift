@@ -18,31 +18,13 @@ struct SavedRecipesModel {
             SavedRecipesModel.savedRecipes.append(recipeData[0])
         }
     }
-    //    mutating func deleteRecipeFromSaved(id: RecipeData.RecipeDescription) {
-    //        if let index = SavedRecipesModel.savedRecipes.firstIndex(of: id) {
-    //            SavedRecipesModel.savedRecipes.remove(at: index)
-    //        }
-    //    }
+    
+    mutating func deleteRecipeFromSaved(_ recipeData: [RecipeData.RecipeDescription]) {
+        let recipeID = recipeData[0].id
+        SavedRecipesModel.savedRecipes.removeAll(where: {$0.id == recipeID})
+    }
     
     func getSavedRecipesList() -> [RecipeData.RecipeDescription] {
         SavedRecipesModel.savedRecipes
     }
 }
-
-
-
-
-
-//// Добавление рецептов в глобальную переменную
-////Это для первичной инициализации пустого массива, не знаю как сделать по другому
-//     if Constants.savedRecipes.isEmpty {
-////         /сюда тип данных RecipeData.RecipeDescription/
-//         Constants.savedRecipes =
-//     } else {
-////         /сюда тип данных RecipeData.RecipeDescription/
-//         Constants.savedRecipes.append()
-//     }
-//
-////  Удаление по индексу, перед этим нужна проверка на outOfRange.error
-//
-//     Constants.savedRecipes.remove(at: <#T##Int#>)

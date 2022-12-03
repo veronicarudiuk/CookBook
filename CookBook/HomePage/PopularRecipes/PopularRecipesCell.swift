@@ -10,13 +10,12 @@ import UIKit
 final class PopularRecipesCell: UICollectionViewCell {
     
     static let reusedID = "PopularRecipesCell"
-    var savedRecipesModel = SavedRecipesModel()
+    private var savedRecipesModel = SavedRecipesModel()
     var recipeData = [RecipeData.RecipeDescription]()
     private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "mealDefaultBackgroundOne")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
@@ -34,7 +33,6 @@ final class PopularRecipesCell: UICollectionViewCell {
     
     let recipeTitle: UILabel = {
         let label = UILabel()
-        label.text = "How to sharwama at home"
         label.font = UIFont(name: "Poppins SemiBold", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -42,7 +40,6 @@ final class PopularRecipesCell: UICollectionViewCell {
     
     let categorieTitle: UILabel = {
         let label = UILabel()
-        label.text = "no category"
         label.textColor = UIColor(named: "GrayTextColor")
         label.font = UIFont(name: "Poppins Regular", size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,16 +81,24 @@ final class PopularRecipesCell: UICollectionViewCell {
     
     @objc func keyPressed(_ sender: UIButton) {
         if sender.currentImage == UIImage(named: "SaveInactive") {
-            sender.setImage(UIImage(named: "SaveActive"), for: .normal)
+            DispatchQueue.main.async {
+                sender.setImage(UIImage(named: "SaveActive"), for: .normal)
+            }
             savedRecipesModel.saveNewRecipe(recipeData)
-            print(savedRecipesModel.getSavedRecipesList().count)
+            DispatchQueue.main.async {
+                self.savedRecipesCollectionView.reloadData()
+//                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
+                let indexPath = IndexPath(row: self.savedRecipesModel.getSavedRecipesList().count - 1, section: 0)
+                self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+            }
+        } else {
+            DispatchQueue.main.async {
+                sender.setImage(UIImage(named: "SaveInactive"), for: .normal)
+            }
+            savedRecipesModel.deleteRecipeFromSaved(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
             }
-        } else {
-            sender.setImage(UIImage(named: "SaveInactive"), for: .normal)
-//            savedRecipesModel.deleteRecipeFromSaved(recipeData: recipeData)
-//            print(savedRecipesModel.getSavedRecipesList())
         }
     }
     

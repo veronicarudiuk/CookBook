@@ -9,8 +9,8 @@ import UIKit
 
 final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDelegate {
     
-    var cells = [RecipeData.RecipeDescription]()
-    var recipeNetworkManager = RecipeNetworkManager()
+    private var cells = [RecipeData.RecipeDescription]()
+    private var recipeNetworkManager = RecipeNetworkManager()
     
     init() {
         
@@ -45,7 +45,6 @@ extension PopularRecipesCollectionView: UICollectionViewDataSource {
         
         cell.recipeTitle.text = cells[indexPath.row].title
         cell.recipeData = [cells[indexPath.row]]
-//        print(cell.recipeData)
         
         if let dishesTypes = cells[indexPath.row].dishTypes {
             if dishesTypes != [] {
@@ -88,6 +87,7 @@ extension PopularRecipesCollectionView: RecipeNetworkManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
+        self.recipeNetworkManager.getRecipes(.random)
         print(error)
     }
 }

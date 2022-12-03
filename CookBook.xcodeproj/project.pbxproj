@@ -137,10 +137,10 @@
 				58DA3E2629350C8900AB3EFF /* AppDelegate.swift */,
 				58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */,
 				5875CED52936149D00983465 /* HomePage */,
+				58F9C934293A147000CD6C57 /* SavedRecipesModel.swift */,
 				58CD82EB2936354700B9777C /* Fonts */,
 				58DA3E2F29350C8B00AB3EFF /* Assets.xcassets */,
 				58DA3E3429350C8B00AB3EFF /* Info.plist */,
-				58F9C934293A147000CD6C57 /* SavedRecipesModel.swift */,
 			);
 			path = CookBook;
 			sourceTree = "<group>";
