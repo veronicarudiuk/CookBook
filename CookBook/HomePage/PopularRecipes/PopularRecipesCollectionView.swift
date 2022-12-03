@@ -9,7 +9,8 @@ import UIKit
 
 final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDelegate {
     
-    var cells = [RecipeData.RecipeDescription]()
+    private var cells = [RecipeData.RecipeDescription]()
+    private var recipeNetworkManager = RecipeNetworkManager()
     
     init() {
         
@@ -19,6 +20,9 @@ final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDele
         
         delegate = self
         dataSource = self
+        
+        self.recipeNetworkManager.delegate = self
+        self.recipeNetworkManager.getRecipes(.random)
         
         register(PopularRecipesCell.self, forCellWithReuseIdentifier: PopularRecipesCell.reusedID)
         
@@ -30,6 +34,7 @@ final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDele
     }
 }
 
+//MARK: - UICollectionViewDataSource
 extension PopularRecipesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cells.count
@@ -39,19 +44,32 @@ extension PopularRecipesCollectionView: UICollectionViewDataSource {
         let cell = dequeueReusableCell(withReuseIdentifier: PopularRecipesCell.reusedID, for: indexPath) as! PopularRecipesCell
         
         cell.recipeTitle.text = cells[indexPath.row].title
+        cell.recipeData = [cells[indexPath.row]]
         
         if let dishesTypes = cells[indexPath.row].dishTypes {
-            let stringDishTypes = dishesTypes.joined(separator: ", ")
-            cell.categorieTitle.text = stringDishTypes
-        } else {
-            cell.categorieTitle.text = "no category"
+            if dishesTypes != [] {
+                let stringDishTypes = dishesTypes.joined(separator: ", ")
+                cell.categorieTitle.text = stringDishTypes
+            } else {
+                cell.categorieTitle.text = "no category"
+            }
         }
         
+        if let dishImage = cells[indexPath.row].image {
+            guard let apiURL = URL(string: dishImage) else { return cell }
+            URLSession.shared.dataTask(with: apiURL) { data, _, _ in
+                guard let data = data else { return }
+                DispatchQueue.main.async {
+                    cell.mainImageView.image = UIImage(data: data)
+                }
+            } .resume()
+        }
         
         return cell
     }
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
 extension PopularRecipesCollectionView: UICollectionViewDelegateFlowLayout {
     //    устанавливаю размер ячейки
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -59,24 +77,17 @@ extension PopularRecipesCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
-extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self?.image = image
-            }
-        }.resume()
+//MARK: - RecipeNetworkManagerDelegate
+extension PopularRecipesCollectionView: RecipeNetworkManagerDelegate {
+    func RecipesDidRecive(_ dataFromApi: RecipeData) {
+        self.cells = dataFromApi.recipes
+        DispatchQueue.main.async {
+            self.reloadData()
+        }
     }
-    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+    
+    func didFailWithError(error: Error) {
+        self.recipeNetworkManager.getRecipes(.random)
+        print(error)
     }
 }
