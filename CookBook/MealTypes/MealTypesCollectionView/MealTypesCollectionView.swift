@@ -10,6 +10,7 @@ import UIKit
 final class MealTypesCollectionView: UICollectionView, UICollectionViewDelegate {
     
     var cells = [RecipeData.RecipeDescription]()
+    var showerDelegate: ShowPecipesDelegate?
     
     init() {
         
@@ -58,6 +59,8 @@ extension MealTypesCollectionView: UICollectionViewDelegateFlowLayout {
 extension MealTypesCollectionView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(mealsdata[indexPath.row].title)
+        showerDelegate?.tagDidRecive(tag: mealsdata[indexPath.row].title)
+
     }
 }
 

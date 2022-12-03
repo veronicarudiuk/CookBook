@@ -18,10 +18,10 @@ enum RequestType {
 struct RecipeNetworkManager {
     private let urlApi = "https://api.spoonacular.com"
     var delegate: RecipeNetworkManagerDelegate?
-
     
-    func getRecipes(_ requestType: RequestType, find requestItem: String? = nil) {
-        let urlString = currentUrl(.random)
+    
+    func getRecipes(_ requestType: RequestType, tag: String? = nil) {
+        let urlString = currentUrl(requestType, tag: tag)
         
         guard let url = URL(string: urlString) else { return  }
         URLSession.shared.dataTask(with: url) {data, response, error in
@@ -38,13 +38,17 @@ struct RecipeNetworkManager {
         }.resume()
     }
     
-    private func currentUrl(_ forRequest: RequestType, findItem: String? = nil) -> String {
+    private func currentUrl(_ forRequest: RequestType, tag: String? = nil) -> String {
         var url = String()
         switch forRequest {
         case .random:
             url = "https://api.spoonacular.com/recipes/random?&number=10&apiKey=\(ApiKey.api.rawValue)"
         case .categories:
-            break // запрос на категории
+            if let tag = tag?.lowercased() {
+                print(tag)
+                url = "https://api.spoonacular.com/recipes/random?&number=10&limitLicense=true&apiKey=\(ApiKey.api.rawValue)&tag=\(tag)"
+                print(url)
+            }
         case .find:
             break // запрос на поиск
         }

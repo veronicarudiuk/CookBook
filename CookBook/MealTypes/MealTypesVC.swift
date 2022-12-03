@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ShowPecipesDelegate {
+    func tagDidRecive(tag: String)
+}
+
 class MealTypesVC: UIViewController {
     
     let mainTitle: UILabel = {
@@ -32,10 +36,9 @@ class MealTypesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         self.recipeNetworkManager.delegate = self
         self.recipeNetworkManager.getRecipes(.random)
+        mealTypesCollectionView.showerDelegate = self
         
         view.backgroundColor = .white
         
@@ -80,3 +83,14 @@ extension MealTypesVC: RecipeNetworkManagerDelegate {
     }
 }
 
+extension MealTypesVC: ShowPecipesDelegate {
+
+    func tagDidRecive(tag: String) {
+        let vc = RecipeListViewController()
+        vc.tag = tag
+        //navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true)
+    }
+    
+    
+}

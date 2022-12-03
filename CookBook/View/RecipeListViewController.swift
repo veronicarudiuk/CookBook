@@ -11,6 +11,7 @@ class RecipeListViewController: UIViewController {
     
     var recipeNetworkManager = RecipeNetworkManager()
     var dataApi = [RecipeData.RecipeDescription]()
+    var tag = String()
     
     let tableView: UITableView = .init()
     
@@ -33,7 +34,7 @@ class RecipeListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         recipeNetworkManager.delegate = self
-        recipeNetworkManager.getRecipes(.random)
+        recipeNetworkManager.getRecipes(.categories, tag: tag)
         
         view.addSubview(mainTitle)
         
@@ -88,6 +89,7 @@ extension RecipeListViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        mainTitle.text = tag
 
 
         NSLayoutConstraint.activate([
@@ -101,13 +103,13 @@ extension RecipeListViewController {
 
 extension RecipeListViewController: RecipeNetworkManagerDelegate {
     func didFailWithError(error: Error) {
-        recipeNetworkManager.getRecipes(.random)
+        recipeNetworkManager.getRecipes(.categories, tag: tag)
 
         print("error")
     }
     
     func RecipesDidRecive(_ dataFromApi: RecipeData) { //  действия, когда данные получены (ассинхронно грузим в view)
-        dataFromApi.recipes.forEach { print($0.title)}
+        //dataFromApi.recipes.forEach { print($0.title)}
         DispatchQueue.main.async {
             self.dataApi = dataFromApi.recipes
             
