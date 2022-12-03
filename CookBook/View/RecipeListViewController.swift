@@ -38,7 +38,7 @@ class RecipeListViewController: UIViewController {
         view.addSubview(mainTitle)
         
         NSLayoutConstraint.activate([
-            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 76),
+            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
             mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
             mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
         ])
@@ -56,8 +56,8 @@ extension RecipeListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableCell", for: indexPath) as? RecipeTableCell else { fatalError() }
         if dataApi.count > 0 {
             cell.titleLabel.text = dataApi[indexPath.row].title
-            cell.ingredientsLabel.text = "9 Ingredients"
-            cell.timeLabel.text = "25 min"
+            cell.ingredientsLabel.text = "\(dataApi[indexPath.row].extendedIngredients.count) Ingredients"
+            cell.timeLabel.text = "\(dataApi[indexPath.row].readyInMinutes) min"
 
             guard let apiURL = URL(string: dataApi[indexPath.row].image) else { return cell }
             URLSession.shared.dataTask(with: apiURL) { data, _, _ in

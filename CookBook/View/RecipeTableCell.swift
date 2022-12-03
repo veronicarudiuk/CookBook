@@ -44,6 +44,14 @@ class RecipeTableCell: UITableViewCell {
         imageView.sizeToFit()
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
+        
+//        let gradient = CAGradientLayer()
+//        gradient.frame = imageView.bounds
+//        let startColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+//        let endColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+//        gradient.colors = [startColor, endColor]
+//        imageView.layer.insertSublayer(gradient, at: 0)
+        
         return imageView
     }()
     
@@ -69,6 +77,13 @@ class RecipeTableCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: 400, height: 200)
+        let startColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+        let endColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        gradient.colors = [startColor, endColor]
+        imageCell.layer.insertSublayer(gradient, at: 0)
         
         NSLayoutConstraint.activate([
             imageCell.topAnchor.constraint(equalTo: topAnchor, constant: 20),
