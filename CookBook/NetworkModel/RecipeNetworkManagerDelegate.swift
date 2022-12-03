@@ -24,7 +24,7 @@ struct RecipeNetworkManager {
         let urlString = currentUrl(.random)
         
         guard let url = URL(string: urlString) else { return  }
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) {data, response, error in
             guard let data = data else { return }
             guard error == nil else { return }
             
