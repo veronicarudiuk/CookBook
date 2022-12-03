@@ -26,6 +26,7 @@ final class PopularRecipesCell: UICollectionViewCell {
     let saveButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "SaveInactive"), for: .normal)
+        button.setImage(UIImage(named: "SaveActive"), for: .selected)
         button.addTarget(target, action: #selector(keyPressed(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -80,10 +81,7 @@ final class PopularRecipesCell: UICollectionViewCell {
     }
     
     @objc func keyPressed(_ sender: UIButton) {
-        if sender.currentImage == UIImage(named: "SaveInactive") {
-            DispatchQueue.main.async {
-                sender.setImage(UIImage(named: "SaveActive"), for: .normal)
-            }
+        if sender.isSelected != true {
             savedRecipesModel.saveNewRecipe(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
@@ -92,14 +90,12 @@ final class PopularRecipesCell: UICollectionViewCell {
                 self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
             }
         } else {
-            DispatchQueue.main.async {
-                sender.setImage(UIImage(named: "SaveInactive"), for: .normal)
-            }
             savedRecipesModel.deleteRecipeFromSaved(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
             }
         }
+        sender.isSelected = !sender.isSelected
     }
     
     required init?(coder: NSCoder) {
