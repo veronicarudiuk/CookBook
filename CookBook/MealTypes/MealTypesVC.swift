@@ -31,12 +31,9 @@ class MealTypesVC: UIViewController {
 
     private var mealTypesCollectionView = MealTypesCollectionView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //mealTypesCollectionView.showerDelegate = self
-
-        
+        mealTypesCollectionView.showerDelegate = self
         view.backgroundColor = .white
         
         view.addSubview(mainTitle)
@@ -62,7 +59,20 @@ class MealTypesVC: UIViewController {
         mealTypesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mealTypesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mealTypesCollectionView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 5).isActive = true
-        mealTypesCollectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
+        mealTypesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
+}
+
+//MARK: - ShowPecipesDelegate
+extension MealTypesVC: ShowPecipesDelegate {
+
+    func tagDidRecive(tag: String) {
+        let vc = RecipeListViewController()
+        vc.tag = tag
+        //navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true)
+    }
+    
+    
 }
 
