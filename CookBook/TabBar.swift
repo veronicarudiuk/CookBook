@@ -19,22 +19,20 @@ class TabBar: UITabBarController {
         setupVCs()
     }
     
-    
     func setupVCs() {
         viewControllers = [
-            createNavController(for: HomePage(), title: NSLocalizedString("Home", comment: ""), image: UIImage(systemName: "house")!),
-            createNavController(for: MealTypesVC(), title: NSLocalizedString("Category", comment: ""), image: UIImage(systemName: "list.bullet.rectangle")!),
-            createNavController(for: SearchVC(), title: NSLocalizedString("Search", comment: ""), image: UIImage(systemName: "magnifyingglass")!),
+            createNavController(for: HomePage(), title: "Home", image: UIImage(named: "Home")!, selectedImage: UIImage(named: "HomeSelected")!),
+            createNavController(for: MealTypesVC(), title: "Category", image: UIImage(named: "Category")!, selectedImage: UIImage(named: "CategorySelected")!),
+            createNavController(for: SearchVC(), title: "Search", image: UIImage(named: "Search")!, selectedImage: UIImage(named: "SearchSelected")!),
         ]
     }
     
     
-    fileprivate func createNavController(for rootViewController: UIViewController,
-                                         title: String,
-                                         image: UIImage) -> UIViewController {
+    fileprivate func createNavController(for rootViewController: UIViewController, title: String, image: UIImage, selectedImage: UIImage) -> UIViewController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.title = title
-        navController.tabBarItem.image = image
+        navController.tabBarItem.image = image.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        navController.tabBarItem.selectedImage = selectedImage.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         return navController
     }
 }
