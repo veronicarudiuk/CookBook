@@ -9,7 +9,7 @@ import UIKit
 
 final class MealTypesCollectionView: UICollectionView, UICollectionViewDelegate {
     
-    var cells = [RecipeData.RecipeDescription]()
+
     var showerDelegate: ShowPecipesDelegate?
     
     init() {
@@ -34,7 +34,7 @@ final class MealTypesCollectionView: UICollectionView, UICollectionViewDelegate 
 
 extension MealTypesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cells.count
+        return mealsdata.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

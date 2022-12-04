@@ -8,7 +8,8 @@
 import Foundation
 
 struct RecipeData: Decodable {
-    let recipes: [RecipeDescription]
+    let results: [RecipeDescription]
+    let a: String?
 }
 
 extension RecipeData {
@@ -16,7 +17,7 @@ extension RecipeData {
         let id: Int
         let title: String
         let image: String?
-        let instructions: String
+        let instructions: String?
         let readyInMinutes: Int
         let servings: Int
         let extendedIngredients: [Ingredients]

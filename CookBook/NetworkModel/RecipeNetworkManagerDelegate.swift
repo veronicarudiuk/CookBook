@@ -36,18 +36,19 @@ struct RecipeNetworkManager {
                 self.delegate?.didFailWithError(error: error)
             }
         }.resume()
+        
     }
     
     private func currentUrl(_ forRequest: RequestType, tag: String? = nil) -> String {
         var url = String()
         switch forRequest {
         case .random:
-            url = "https://api.spoonacular.com/recipes/random?&number=10&apiKey=\(ApiKey.api.rawValue)"
+            url = "https://api.spoonacular.com/recipes/complexSearch?number=10&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&apiKey=\(ApiKey.api.rawValue)&type=random"
         case .categories:
             if let tag = tag?.lowercased() {
                 print(tag)
-                url = "https://api.spoonacular.com/recipes/random?&number=10&limitLicense=true&apiKey=\(ApiKey.api.rawValue)&tag=\(tag)"
-                print(url)
+                let type = tag.replacingOccurrences(of: " ", with: "+")
+                url = "https://api.spoonacular.com/recipes/complexSearch?number=10&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&apiKey=\(ApiKey.api.rawValue)&type=\(type)"
             }
         case .find:
             break // запрос на поиск

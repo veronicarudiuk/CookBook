@@ -39,7 +39,7 @@ class RecipeListViewController: UIViewController {
         view.addSubview(mainTitle)
         
         NSLayoutConstraint.activate([
-            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
+            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
             mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
             mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
         ])
@@ -111,7 +111,7 @@ extension RecipeListViewController: RecipeNetworkManagerDelegate {
     func RecipesDidRecive(_ dataFromApi: RecipeData) { //  действия, когда данные получены (ассинхронно грузим в view)
         //dataFromApi.recipes.forEach { print($0.title)}
         DispatchQueue.main.async {
-            self.dataApi = dataFromApi.recipes
+            self.dataApi = dataFromApi.results
             
             self.tableView.reloadData()
             
