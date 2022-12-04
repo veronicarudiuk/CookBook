@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ShowPecipesDelegate {
+    func tagDidRecive(tag: String)
+}
+
 class MealTypesVC: UIViewController {
     
     let mainTitle: UILabel = {
@@ -27,10 +31,9 @@ class MealTypesVC: UIViewController {
         
     private var mealTypesCollectionView = MealTypesCollectionView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mealTypesCollectionView.showerDelegate = self
         view.backgroundColor = .white
         
         view.addSubview(mainTitle)
@@ -58,4 +61,17 @@ class MealTypesVC: UIViewController {
         mealTypesCollectionView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 5).isActive = true
         mealTypesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
+}
+
+//MARK: - ShowPecipesDelegate
+extension MealTypesVC: ShowPecipesDelegate {
+
+    func tagDidRecive(tag: String) {
+        let vc = RecipeListViewController()
+        vc.tag = tag
+        //navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true)
+    }
+    
+    
 }
