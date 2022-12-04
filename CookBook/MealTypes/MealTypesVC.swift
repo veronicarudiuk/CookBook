@@ -56,6 +56,6 @@ class MealTypesVC: UIViewController {
         mealTypesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mealTypesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mealTypesCollectionView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 5).isActive = true
-        mealTypesCollectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
+        mealTypesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
