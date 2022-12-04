@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010BAF1B293D170F00BB4488 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BAF1A293D170F00BB4488 /* SearchData.swift */; };
 		01E0148B2937C13F00744CA8 /* RecipeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E0148A2937C13F00744CA8 /* RecipeTableCell.swift */; };
 		01E0148D2938009C00744CA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E0148C2938009C00744CA8 /* Assets.xcassets */; };
 		01F99E062936891300B8C335 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F99E052936891300B8C335 /* RecipeListViewController.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		010BAF1A293D170F00BB4488 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 		01E0148A2937C13F00744CA8 /* RecipeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableCell.swift; sourceTree = "<group>"; };
 		01E0148C2938009C00744CA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01F99E052936891300B8C335 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				01F99E082936897500B8C335 /* RecipeNetworkManagerDelegate.swift */,
+				010BAF1A293D170F00BB4488 /* SearchData.swift */,
 				01F99E0B293689CB00B8C335 /* RecipeData.swift */,
 				01F99E0D293689E500B8C335 /* ApiKey.swift */,
 			);
@@ -290,6 +293,7 @@
 				01F99E092936897500B8C335 /* RecipeNetworkManagerDelegate.swift in Sources */,
 				01E0148B2937C13F00744CA8 /* RecipeTableCell.swift in Sources */,
 				01F99E0C293689CB00B8C335 /* RecipeData.swift in Sources */,
+				010BAF1B293D170F00BB4488 /* SearchData.swift in Sources */,
 				5875CED32936148F00983465 /* HomePage.swift in Sources */,
 				58A4EE252936676A00FE17B9 /* SavedRecipesCell.swift in Sources */,
 				58F9C935293A147000CD6C57 /* SavedRecipesModel.swift in Sources */,

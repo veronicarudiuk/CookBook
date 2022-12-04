@@ -40,6 +40,22 @@ struct RecipeNetworkManager {
         }.resume()
     }
     
+    //MARK: - searchRecipe
+    func searchRecipe(by title: String, results: @escaping ([SearchData]) -> Void) {
+        let urlString = "https://api.spoonacular.com/recipes/autocomplete?apiKey=\(ApiKey.api.rawValue)&query=\(title)"
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard error == nil else { return }
+            guard let data = data else { return }
+            do {
+                let data = try JSONDecoder().decode([SearchData].self, from: data)
+                results(data)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
     //MARK: - Private current URL method
     private func currentUrl(_ forRequest: RequestType, tag: String? = nil) -> String {
         var url = String()
