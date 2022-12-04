@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ShowPecipesDelegate {
+    func tagDidRecive(tag: String)
+}
+
 class MealTypesVC: UIViewController {
     
     let mainTitle: UILabel = {
@@ -24,19 +28,12 @@ class MealTypesVC: UIViewController {
         return imageView
     }()
     
-    
-    var recipeNetworkManager = RecipeNetworkManager()
-    
+
     private var mealTypesCollectionView = MealTypesCollectionView()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.recipeNetworkManager.delegate = self
-        self.recipeNetworkManager.getRecipes(.random)
-        
+        mealTypesCollectionView.showerDelegate = self
         view.backgroundColor = .white
         
         view.addSubview(mainTitle)
@@ -62,21 +59,20 @@ class MealTypesVC: UIViewController {
         mealTypesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mealTypesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mealTypesCollectionView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 5).isActive = true
-        mealTypesCollectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
+        mealTypesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
 
-//MARK: - RecipeNetworkManagerDelegate
-extension MealTypesVC: RecipeNetworkManagerDelegate {
-    func RecipesDidRecive(_ dataFromApi: RecipeData) {
-        self.mealTypesCollectionView.cells = dataFromApi.recipes
-        DispatchQueue.main.async {
-            self.mealTypesCollectionView.reloadData()
-        }
+//MARK: - ShowPecipesDelegate
+extension MealTypesVC: ShowPecipesDelegate {
+
+    func tagDidRecive(tag: String) {
+        let vc = RecipeListViewController()
+        vc.tag = tag
+        //navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true)
     }
     
-    func didFailWithError(error: Error) {
-        print(error)
-    }
+    
 }
 
