@@ -24,18 +24,12 @@ class MealTypesVC: UIViewController {
         return imageView
     }()
     
-    
-    var recipeNetworkManager = RecipeNetworkManager()
-    
+        
     private var mealTypesCollectionView = MealTypesCollectionView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.recipeNetworkManager.delegate = self
-        self.recipeNetworkManager.getRecipes(.random)
         
         view.backgroundColor = .white
         
@@ -65,18 +59,3 @@ class MealTypesVC: UIViewController {
         mealTypesCollectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
     }
 }
-
-//MARK: - RecipeNetworkManagerDelegate
-extension MealTypesVC: RecipeNetworkManagerDelegate {
-    func RecipesDidRecive(_ dataFromApi: RecipeData) {
-        self.mealTypesCollectionView.cells = dataFromApi.recipes
-        DispatchQueue.main.async {
-            self.mealTypesCollectionView.reloadData()
-        }
-    }
-    
-    func didFailWithError(error: Error) {
-        print(error)
-    }
-}
-

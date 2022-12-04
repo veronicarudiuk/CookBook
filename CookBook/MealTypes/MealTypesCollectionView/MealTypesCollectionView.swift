@@ -9,7 +9,7 @@ import UIKit
 
 final class MealTypesCollectionView: UICollectionView, UICollectionViewDelegate {
     
-    var cells = [RecipeData.RecipeDescription]()
+    var cells = mealsdata
     
     init() {
         
@@ -33,13 +33,13 @@ final class MealTypesCollectionView: UICollectionView, UICollectionViewDelegate 
 
 extension MealTypesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cells.count
+        return mealsdata.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: MealTypeCell.reusedID, for: indexPath) as! MealTypeCell
         
-        cell.mealTypeName.text = mealsdata[indexPath.row].title
+        cell.setup(with: mealsdata[indexPath.row])
         return cell
     }
     

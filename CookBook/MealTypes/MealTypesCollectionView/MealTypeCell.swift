@@ -13,20 +13,34 @@ final class MealTypeCell: UICollectionViewCell {
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "mealDefaultBackgroundOne")
         imageView.contentMode = .center
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: 400, height: 200)
+        let startColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+        let endColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        gradient.colors = [startColor, endColor]
+        imageView.layer.insertSublayer(gradient, at: 0)
+        
         return imageView
     }()
     
     
     let mealTypeName: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Poppins SemiBold", size: 24)
-        label.textColor = .black
+        label.font = UIFont(name: "Poppins SemiBold", size: 16)
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    func setup(with meal: MealTypesData) {
+        mainImageView.image = meal.image
+        mealTypeName.text = meal.title
+        
+        
+    }
     
     
     override init(frame: CGRect) {
@@ -35,13 +49,14 @@ final class MealTypeCell: UICollectionViewCell {
         contentView.addSubview(mainImageView)
         contentView.addSubview(mealTypeName)
         contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 10
         
         
         mainImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         mainImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         mainImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         
-        mealTypeName.topAnchor.constraint(equalTo: mainImageView.topAnchor, constant: 8).isActive = true
+        mealTypeName.topAnchor.constraint(equalTo: mainImageView.topAnchor, constant: 65).isActive = true
         mealTypeName.leadingAnchor.constraint(equalTo: mainImageView.leadingAnchor, constant: 5).isActive = true
         mealTypeName.heightAnchor.constraint(equalToConstant: 30).isActive = true
         mealTypeName.widthAnchor.constraint(equalToConstant: 160).isActive = true
@@ -52,22 +67,4 @@ final class MealTypeCell: UICollectionViewCell {
     }
 }
 
-/*
- class UIOutlinedLabel: UILabel {
- 
- var outlineWidth: CGFloat = 5
- var outlineColor: UIColor = UIColor.black
- 
- override func drawText(in rect: CGRect) {
- 
- let strokeTextAttributes = [
- NSAttributedString.Key.strokeColor : outlineColor,
- NSAttributedString.Key.strokeWidth : -1 * outlineWidth,
- ] as [NSAttributedString.Key : Any]
- 
- self.attributedText = NSAttributedString(string: self.text ?? "", attributes: strokeTextAttributes)
- super.drawText(in: rect)
- }
- }
- */
 
