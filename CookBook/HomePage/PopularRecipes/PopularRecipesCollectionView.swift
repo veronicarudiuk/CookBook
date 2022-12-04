@@ -80,7 +80,7 @@ extension PopularRecipesCollectionView: UICollectionViewDelegateFlowLayout {
 //MARK: - RecipeNetworkManagerDelegate
 extension PopularRecipesCollectionView: RecipeNetworkManagerDelegate {
     func RecipesDidRecive(_ dataFromApi: RecipeData) {
-        self.cells = dataFromApi.recipes
+        self.cells = dataFromApi.results
         DispatchQueue.main.async {
             self.reloadData()
         }

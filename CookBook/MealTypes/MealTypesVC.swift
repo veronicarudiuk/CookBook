@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ShowPecipesDelegate {
+    func tagDidRecive(tag: String)
+}
+
 class MealTypesVC: UIViewController {
     
     let mainTitle: UILabel = {
@@ -24,12 +28,14 @@ class MealTypesVC: UIViewController {
         return imageView
     }()
     
-        
+
     private var mealTypesCollectionView = MealTypesCollectionView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //mealTypesCollectionView.showerDelegate = self
+
         
         view.backgroundColor = .white
         
@@ -59,3 +65,4 @@ class MealTypesVC: UIViewController {
         mealTypesCollectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
     }
 }
+
