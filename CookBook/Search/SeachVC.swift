@@ -106,7 +106,7 @@ extension SearchVC {
 //MARK: - RecipeNetworkManagerDelegate
 extension SearchVC: RecipeNetworkManagerDelegate {
     func RecipesDidRecive(_ dataFromApi: RecipeData) {
-        searchResults = dataFromApi.recipes
+        searchResults = dataFromApi.results
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
