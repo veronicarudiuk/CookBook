@@ -11,8 +11,10 @@ final class PopularRecipesCell: UICollectionViewCell {
     
     static let reusedID = "PopularRecipesCell"
     private var savedRecipesModel = SavedRecipesModel()
-    var recipeData = [RecipeData.RecipeDescription]()
     private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
+    
+    var recipeData = [RecipeData.RecipeDescription]()
+    var recipeID = 0
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
@@ -59,6 +61,18 @@ final class PopularRecipesCell: UICollectionViewCell {
         setAnchors()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        self.saveButton.setImage(UIImage(named: "SaveInactive"), for: .normal)
+        self.saveButton.isSelected = false
+//        if savedRecipesModel.getSavedRecipesList().contains(where: {$0.id == recipeID}) {
+//            self.saveButton.isSelected = true
+//        }
+//        } else {
+//            self.saveButton.isSelected = false
+//        }
+    }
+    
     func setAnchors() {
         mainImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         mainImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -85,7 +99,7 @@ final class PopularRecipesCell: UICollectionViewCell {
             savedRecipesModel.saveNewRecipe(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
-//                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
+                //                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
                 let indexPath = IndexPath(row: self.savedRecipesModel.getSavedRecipesList().count - 1, section: 0)
                 self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
             }
