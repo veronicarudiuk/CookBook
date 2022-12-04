@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct SavedRecipesModel {
     
@@ -14,11 +15,13 @@ struct SavedRecipesModel {
     mutating func saveNewRecipe(_ recipeData: [RecipeData.RecipeDescription]) {
         if SavedRecipesModel.savedRecipes.isEmpty {
             SavedRecipesModel.savedRecipes = [recipeData[0]]
+        } else if SavedRecipesModel.savedRecipes.contains(where: {$0.id == recipeData[0].id}) {
+            return
         } else {
             SavedRecipesModel.savedRecipes.append(recipeData[0])
         }
     }
-    
+
     mutating func deleteRecipeFromSaved(_ recipeData: [RecipeData.RecipeDescription]) {
         let recipeID = recipeData[0].id
         SavedRecipesModel.savedRecipes.removeAll(where: {$0.id == recipeID})
@@ -26,5 +29,13 @@ struct SavedRecipesModel {
     
     func getSavedRecipesList() -> [RecipeData.RecipeDescription] {
         SavedRecipesModel.savedRecipes
+    }
+    
+    func setSaveButtonImage(button: UIButton, recipeID: Int) {
+        if SavedRecipesModel.savedRecipes.contains(where: {$0.id == recipeID}) {
+            button.isSelected = true
+        } else {
+            button.isSelected = false
+        }
     }
 }

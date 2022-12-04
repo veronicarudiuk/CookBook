@@ -10,11 +10,9 @@ import UIKit
 final class PopularRecipesCell: UICollectionViewCell {
     
     static let reusedID = "PopularRecipesCell"
-    private var savedRecipesModel = SavedRecipesModel()
     private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
-    
+    var savedRecipesModel = SavedRecipesModel()
     var recipeData = [RecipeData.RecipeDescription]()
-    var recipeID = 0
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
@@ -59,18 +57,6 @@ final class PopularRecipesCell: UICollectionViewCell {
         addSubview(saveButton)
         
         setAnchors()
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-//        self.saveButton.setImage(UIImage(named: "SaveInactive"), for: .normal)
-        self.saveButton.isSelected = false
-//        if savedRecipesModel.getSavedRecipesList().contains(where: {$0.id == recipeID}) {
-//            self.saveButton.isSelected = true
-//        }
-//        } else {
-//            self.saveButton.isSelected = false
-//        }
     }
     
     func setAnchors() {
