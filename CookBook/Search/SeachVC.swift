@@ -9,7 +9,7 @@ import UIKit
 
 class SearchVC: UIViewController {
     
-    var searchResults = [RecipeData.RecipeDescription]()
+    var searchResults = [SearchData]()
     
     var recipeNetworkManager = RecipeNetworkManager()
     
@@ -53,12 +53,9 @@ class SearchVC: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.title = "Search recipes"
         
-        recipeNetworkManager.delegate = self
         
         setupElements()
     }
-    
-    
 }
 
 
@@ -88,19 +85,25 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-
+//MARK: - Update TableView by searchResults
 extension SearchVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchResults.isEmpty { searchStub.removeFromSuperview() }
         if searchText != "" {
-        recipeNetworkManager.getRecipes(.random)
+            
+            recipeNetworkManager.searchRecipe(by: searchText) { [weak self] data in
+                self?.searchResults = data
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 }
 
 
 extension SearchVC {
-    
     func setupElements() {
         view.addSubview(tableView)
         
@@ -114,20 +117,5 @@ extension SearchVC {
         searchStub.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         searchStub.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-    }
-}
-
-
-//MARK: - RecipeNetworkManagerDelegate
-extension SearchVC: RecipeNetworkManagerDelegate {
-    func RecipesDidRecive(_ dataFromApi: RecipeData) {
-        searchResults = dataFromApi.results
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func didFailWithError(error: Error) {
-        print(error)
     }
 }
