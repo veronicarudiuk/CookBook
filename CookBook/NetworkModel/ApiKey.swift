@@ -12,5 +12,5 @@ import Foundation
 
 //  add to gitignore
 enum ApiKey: String{
-    case api = "613ca01b8c5e443986dc8eaa1946d5ec"
+    case api = "3e9c0e0c45e840cdbe6732a19d9f1884"
 }
