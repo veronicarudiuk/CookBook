@@ -29,8 +29,8 @@
 		AAB09CC0293A096000DFFF34 /* MealTypesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CBF293A096000DFFF34 /* MealTypesCollectionView.swift */; };
 		AAB09CC2293A098600DFFF34 /* MealTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CC1293A098600DFFF34 /* MealTypeCell.swift */; };
 		AAB09CC6293A622300DFFF34 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CC5293A622300DFFF34 /* TabBar.swift */; };
-		AABC93F6293C9A0000C3E57E /* SeachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC93F5293C9A0000C3E57E /* SeachVC.swift */; };
-		AABC93FB293C9BC200C3E57E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC93F9293C9BC200C3E57E /* SearchCell.swift */; };
+		AABC93FF293CC92700C3E57E /* SeachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC93FE293CC92700C3E57E /* SeachVC.swift */; };
+		AABC9401293CC92F00C3E57E /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC9400293CC92E00C3E57E /* SearchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +58,8 @@
 		AAB09CBF293A096000DFFF34 /* MealTypesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypesCollectionView.swift; sourceTree = "<group>"; };
 		AAB09CC1293A098600DFFF34 /* MealTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypeCell.swift; sourceTree = "<group>"; };
 		AAB09CC5293A622300DFFF34 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		AABC93F5293C9A0000C3E57E /* SeachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachVC.swift; sourceTree = "<group>"; };
-		AABC93F9293C9BC200C3E57E /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		AABC93FE293CC92700C3E57E /* SeachVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeachVC.swift; path = CookBook/Search/SeachVC.swift; sourceTree = "<group>"; };
+		AABC9400293CC92E00C3E57E /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = CookBook/Search/SearchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +150,7 @@
 			children = (
 				AAB09CB8293A04DA00DFFF34 /* MealTypes */,
 				01F99E0A2936898C00B8C335 /* NetworkModel */,
+				AABC93FD293CC8D600C3E57E /* Search */,
 				01F99E072936892000B8C335 /* View */,
 				58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */,
 				58DA3E2629350C8900AB3EFF /* AppDelegate.swift */,
@@ -191,13 +192,14 @@
 			path = MealTypesCollectionView;
 			sourceTree = "<group>";
 		};
-		AABC93F7293C9A1D00C3E57E /* Search */ = {
+		AABC93FD293CC8D600C3E57E /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				AABC93F5293C9A0000C3E57E /* SeachVC.swift */,
-				AABC93F9293C9BC200C3E57E /* SearchCell.swift */,
+				AABC9400293CC92E00C3E57E /* SearchCell.swift */,
+				AABC93FE293CC92700C3E57E /* SeachVC.swift */,
 			);
-			path = Search;
+			name = Search;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,18 +275,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				58A4EE23293666F100FE17B9 /* SavedRecipesCollectionView.swift in Sources */,
+				AABC9401293CC92F00C3E57E /* SearchCell.swift in Sources */,
 				AAB09CBB293A04F500DFFF34 /* MealTypesData.swift in Sources */,
 				58A4EE1D29364B5D00FE17B9 /* PopularRecipesCollectionView.swift in Sources */,
 				AAB09CC6293A622300DFFF34 /* TabBar.swift in Sources */,
+				AABC93FF293CC92700C3E57E /* SeachVC.swift in Sources */,
 				AAB09CBD293A090F00DFFF34 /* MealTypesVC.swift in Sources */,
 				58A4EE1F29364FD100FE17B9 /* PopularRecipesCell.swift in Sources */,
 				58DA3E2729350C8900AB3EFF /* AppDelegate.swift in Sources */,
 				01F99E0E293689E500B8C335 /* ApiKey.swift in Sources */,
 				01F99E062936891300B8C335 /* RecipeListViewController.swift in Sources */,
 				AAB09CC2293A098600DFFF34 /* MealTypeCell.swift in Sources */,
-				AABC93FB293C9BC200C3E57E /* SearchCell.swift in Sources */,
 				58DA3E2929350C8900AB3EFF /* SceneDelegate.swift in Sources */,
-				AABC93F6293C9A0000C3E57E /* SeachVC.swift in Sources */,
 				01F99E092936897500B8C335 /* RecipeNetworkManagerDelegate.swift in Sources */,
 				01E0148B2937C13F00744CA8 /* RecipeTableCell.swift in Sources */,
 				01F99E0C293689CB00B8C335 /* RecipeData.swift in Sources */,
