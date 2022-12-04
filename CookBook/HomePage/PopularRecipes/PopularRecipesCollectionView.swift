@@ -43,6 +43,8 @@ extension PopularRecipesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: PopularRecipesCell.reusedID, for: indexPath) as! PopularRecipesCell
         
+        cell.savedRecipesModel.setSaveButtonImage(button: cell.saveButton, recipeID: cells[indexPath.row].id)
+        
         cell.recipeTitle.text = cells[indexPath.row].title
         cell.recipeData = [cells[indexPath.row]]
         
