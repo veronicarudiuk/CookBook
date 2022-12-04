@@ -9,9 +9,9 @@ import Foundation
 
 struct RecipeData: Decodable {
     let results: [RecipeDescription]
-    let a: String?
 }
 
+// MARK: - results
 extension RecipeData {
     struct RecipeDescription: Decodable {
         let id: Int
@@ -24,7 +24,7 @@ extension RecipeData {
         let dishTypes: [String]?
     }
     
-    
+    //MARK: - extendedIngredients
     struct Ingredients: Decodable {
         let id: Int
         let name: String

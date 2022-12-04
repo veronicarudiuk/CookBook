@@ -7,12 +7,11 @@
 
 import UIKit
 
-class RecipeListViewController: UIViewController {
+final class RecipeListViewController: UIViewController {
     
     var recipeNetworkManager = RecipeNetworkManager()
     var dataApi = [RecipeData.RecipeDescription]()
     var tag = String()
-    
     let tableView: UITableView = .init()
     
     let mainTitle: UILabel = {
@@ -24,7 +23,6 @@ class RecipeListViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +42,10 @@ class RecipeListViewController: UIViewController {
             mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
         ])
     }
-    
 }
 
+//MARK: - UITableViewDataSource - Load tableView data
 extension RecipeListViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10
     }
@@ -78,19 +75,19 @@ extension RecipeListViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate
 extension RecipeListViewController: UITableViewDelegate {
 
 }
 
+//MARK: - Private UI setup methods
 extension RecipeListViewController {
-    func setupTableView() {
+    private func setupTableView() {
         view.addSubview(tableView)
-
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         mainTitle.text = tag
-
 
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -101,20 +98,23 @@ extension RecipeListViewController {
     }
 }
 
+//MARK: - RecipeNetworkManagerDelegate
 extension RecipeListViewController: RecipeNetworkManagerDelegate {
     func didFailWithError(error: Error) {
-        recipeNetworkManager.getRecipes(.categories, tag: tag)
-
         print("error")
+        let alertController = UIAlertController(title: "Error", message: "Network request fail with error: \(error). Try again?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Try again", style: UIAlertAction.Style.default) {_ in
+            self.recipeNetworkManager.getRecipes(.categories, tag: self.tag)
+            }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func RecipesDidRecive(_ dataFromApi: RecipeData) { //  действия, когда данные получены (ассинхронно грузим в view)
         //dataFromApi.recipes.forEach { print($0.title)}
         DispatchQueue.main.async {
             self.dataApi = dataFromApi.results
-            
             self.tableView.reloadData()
-            
         }
     }
 }
