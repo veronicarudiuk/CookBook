@@ -7,7 +7,9 @@
 import UIKit
 
 final class RecipeTableCell: UITableViewCell {
-    let data = [RecipeData.RecipeDescription]()
+    var data = [RecipeData.RecipeDescription]()
+    var savedRecipesModel = SavedRecipesModel()
+    private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -50,6 +52,7 @@ final class RecipeTableCell: UITableViewCell {
     let saveButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "SaveInactive"), for: .normal)
+        button.setImage(UIImage(named: "SaveActive"), for: .selected)
         button.addTarget(target, action: #selector(favoriteButtonPressed(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -109,12 +112,20 @@ final class RecipeTableCell: UITableViewCell {
     
     //MARK: - Actions
     @objc func favoriteButtonPressed(_ sender: UIButton) {
-        
-        //FIXME: - adding to the favorites list
-        if sender.currentImage == UIImage(named: "SaveInactive") {
-            sender.setImage(UIImage(named: "SaveActive"), for: .normal)
+        if sender.isSelected != true {
+            savedRecipesModel.saveNewRecipe(data)
+            DispatchQueue.main.async {
+                self.savedRecipesCollectionView.reloadData()
+                //                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
+                let indexPath = IndexPath(row: self.savedRecipesModel.getSavedRecipesList().count - 1, section: 0)
+                self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+            }
         } else {
-            sender.setImage(UIImage(named: "SaveInactive"), for: .normal)
+            savedRecipesModel.deleteRecipeFromSaved(data)
+            DispatchQueue.main.async {
+                self.savedRecipesCollectionView.reloadData()
+            }
         }
+        sender.isSelected = !sender.isSelected
     }
 }
