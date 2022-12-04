@@ -28,14 +28,14 @@ class MealTypesVC: UIViewController {
         return imageView
     }()
     
-    
-    
+
     private var mealTypesCollectionView = MealTypesCollectionView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mealTypesCollectionView.showerDelegate = self
+        //mealTypesCollectionView.showerDelegate = self
+
         
         view.backgroundColor = .white
         
@@ -66,16 +66,3 @@ class MealTypesVC: UIViewController {
     }
 }
 
-
-
-extension MealTypesVC: ShowPecipesDelegate {
-
-    func tagDidRecive(tag: String) {
-        let vc = RecipeListViewController()
-        vc.tag = tag
-        //navigationController?.pushViewController(vc, animated: true)
-        present(vc, animated: true)
-    }
-    
-    
-}
