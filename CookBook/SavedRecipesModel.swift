@@ -21,7 +21,7 @@ struct SavedRecipesModel {
             SavedRecipesModel.savedRecipes.append(recipeData[0])
         }
     }
-    
+
     mutating func deleteRecipeFromSaved(_ recipeData: [RecipeData.RecipeDescription]) {
         let recipeID = recipeData[0].id
         SavedRecipesModel.savedRecipes.removeAll(where: {$0.id == recipeID})
@@ -32,10 +32,10 @@ struct SavedRecipesModel {
     }
     
     func setSaveButtonImage(button: UIButton, recipeID: Int) {
-             if SavedRecipesModel.savedRecipes.contains(where: {$0.id == recipeID}) {
-                 button.isSelected = true
-             } else {
-                 button.isSelected = false
-             }
-         }
+        if SavedRecipesModel.savedRecipes.contains(where: {$0.id == recipeID}) {
+            button.isSelected = true
+        } else {
+            button.isSelected = false
+        }
+    }
 }
