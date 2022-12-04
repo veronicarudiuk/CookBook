@@ -42,7 +42,8 @@ struct RecipeNetworkManager {
     
     //MARK: - searchRecipe
     func searchRecipe(by title: String, results: @escaping ([SearchData]) -> Void) {
-        let urlString = "https://api.spoonacular.com/recipes/autocomplete?apiKey=\(ApiKey.api.rawValue)&query=\(title)"
+        let findTitle = title.replacingOccurrences(of: " ", with: "+")
+        let urlString = "https://api.spoonacular.com/recipes/autocomplete?apiKey=\(ApiKey.api.rawValue)&query=\(findTitle)&number=25"
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else { return }
