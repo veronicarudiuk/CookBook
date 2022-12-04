@@ -6,8 +6,7 @@
 //
 import UIKit
 
-class RecipeTableCell: UITableViewCell {
-    
+final class RecipeTableCell: UITableViewCell {
     let data = [RecipeData.RecipeDescription]()
     
     let titleLabel: UILabel = {
@@ -45,20 +44,13 @@ class RecipeTableCell: UITableViewCell {
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         
-//        let gradient = CAGradientLayer()
-//        gradient.frame = imageView.bounds
-//        let startColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-//        let endColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-//        gradient.colors = [startColor, endColor]
-//        imageView.layer.insertSublayer(gradient, at: 0)
-        
         return imageView
     }()
     
     let saveButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "SaveInactive"), for: .normal)
-        button.addTarget(target, action: #selector(keyPressed(_:)), for: .touchUpInside)
+        button.addTarget(target, action: #selector(favoriteButtonPressed(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -72,6 +64,7 @@ class RecipeTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Private UI setup methods
     private func setupCell() {
         [imageCell, titleLabel, ingredientsLabel, textSeparatorImage, timeLabel, saveButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +107,10 @@ class RecipeTableCell: UITableViewCell {
         ])
     }
     
-    @objc func keyPressed(_ sender: UIButton) {
+    //MARK: - Actions
+    @objc func favoriteButtonPressed(_ sender: UIButton) {
+        
+        //FIXME: - adding to the favorites list
         if sender.currentImage == UIImage(named: "SaveInactive") {
             sender.setImage(UIImage(named: "SaveActive"), for: .normal)
         } else {

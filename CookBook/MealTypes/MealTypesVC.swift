@@ -28,7 +28,7 @@ class MealTypesVC: UIViewController {
         return imageView
     }()
     
-        
+
     private var mealTypesCollectionView = MealTypesCollectionView()
     
     override func viewDidLoad() {
@@ -75,3 +75,4 @@ extension MealTypesVC: ShowPecipesDelegate {
     
     
 }
+
