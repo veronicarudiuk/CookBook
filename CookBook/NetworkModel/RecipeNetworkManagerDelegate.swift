@@ -6,28 +6,30 @@
 //
 import Foundation
 
+//MARK: RecipeNetworkManagerDelegate
 protocol RecipeNetworkManagerDelegate {
     func RecipesDidRecive(_ dataFromApi: RecipeData)
     func didFailWithError(error: Error)
 }
 
+//MARK: Types of request
 enum RequestType {
     case random, categories, find
 }
 
+
+//MARK: - Data parser by URL
 struct RecipeNetworkManager {
     private let urlApi = "https://api.spoonacular.com"
     var delegate: RecipeNetworkManagerDelegate?
-
     
-    func getRecipes(_ requestType: RequestType, find requestItem: String? = nil) {
-        let urlString = currentUrl(.random)
+    func getRecipes(_ requestType: RequestType, tag: String? = nil) {
+        let urlString = currentUrl(requestType, tag: tag)
         
         guard let url = URL(string: urlString) else { return  }
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) {data, response, error in
             guard let data = data else { return }
             guard error == nil else { return }
-            
             do {
                 let recipes = try JSONDecoder().decode(RecipeData.self, from: data)
                 self.delegate?.RecipesDidRecive(recipes)
@@ -38,13 +40,34 @@ struct RecipeNetworkManager {
         }.resume()
     }
     
-    private func currentUrl(_ forRequest: RequestType, findItem: String? = nil) -> String {
+    //MARK: - searchRecipe
+    func searchRecipe(by title: String, results: @escaping ([SearchData]) -> Void) {
+        let findTitle = title.replacingOccurrences(of: " ", with: "+")
+        let urlString = "https://api.spoonacular.com/recipes/autocomplete?apiKey=\(ApiKey.api.rawValue)&query=\(findTitle)&number=25"
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard error == nil else { return }
+            guard let data = data else { return }
+            do {
+                let data = try JSONDecoder().decode([SearchData].self, from: data)
+                results(data)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    //MARK: - Private current URL method
+    private func currentUrl(_ forRequest: RequestType, tag: String? = nil) -> String {
         var url = String()
         switch forRequest {
         case .random:
-            url = "https://api.spoonacular.com/recipes/random?&number=10&apiKey=\(ApiKey.api.rawValue)"
+            url = "https://api.spoonacular.com/recipes/complexSearch?number=10&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&apiKey=\(ApiKey.api.rawValue)&type=random"
         case .categories:
-            break // запрос на категории
+            if let tag = tag?.lowercased() {
+                let type = tag.replacingOccurrences(of: " ", with: "+")
+                url = "https://api.spoonacular.com/recipes/complexSearch?number=10&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&apiKey=\(ApiKey.api.rawValue)&type=\(type)"
+            }
         case .find:
             break // запрос на поиск
         }
