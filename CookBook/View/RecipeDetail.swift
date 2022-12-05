@@ -11,6 +11,8 @@ class RecipeDetail: UIViewController {
     
     let scrollView = UIScrollView()
     let contentView = UIView()
+    var recipeID = 0
+
     
     let tableView: UITableView = .init()
 //    let dataApi = RecipeData.RecipeDescription.self
@@ -36,7 +38,7 @@ class RecipeDetail: UIViewController {
     
     let caloriesLabel: UILabel = {
         let label = UILabel()
-        label.text = "Calories"
+        label.text = "240 Calories"
         label.font = UIFont(name: "Poppins Regular", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -66,13 +68,24 @@ class RecipeDetail: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let recipeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста Много много текста "
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Poppins Regular", size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupScrollView()
         setupViews()
-        setupTableView()
+//        setupTableView()
         tableView.register(RecipeDetailCell.self, forCellReuseIdentifier: "RecipeDetailCell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -97,33 +110,78 @@ class RecipeDetail: UIViewController {
 
     
     func setupViews(){
-        contentView.addSubview(titleDish)
-        contentView.addSubview(imageDish)
-        titleDish.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 32).isActive = true
-        titleDish.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        titleDish.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        imageDish.topAnchor.constraint(equalTo: titleDish.bottomAnchor, constant: 45).isActive = true
-        imageDish.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        imageDish.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        imageDish.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        }
-    
-    
-    func setupTableView() {
-        view.addSubview(tableView)
-
+        contentView.addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
-
+        
+        contentView.addSubview(titleDish)
+        contentView.addSubview(imageDish)
+        contentView.addSubview(caloriesLabel)
+        contentView.addSubview(timeLabel)
+        contentView.addSubview(difficultyLevelLabel)
+        contentView.addSubview(servesLabel)
+        contentView.addSubview(recipeLabel)
+        
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableView.topAnchor.constraint(equalTo: imageDish.bottomAnchor,constant: 68),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        titleDish.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 32),
+        titleDish.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+        titleDish.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+        
+        imageDish.topAnchor.constraint(equalTo: titleDish.bottomAnchor, constant: 45),
+        imageDish.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+        imageDish.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        imageDish.heightAnchor.constraint(equalToConstant: 200),
+        
+        caloriesLabel.topAnchor.constraint(equalTo: imageDish.bottomAnchor, constant: 20),
+        caloriesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+        caloriesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        
+        timeLabel.topAnchor.constraint(equalTo: imageDish.bottomAnchor, constant: 20),
+        timeLabel.leadingAnchor.constraint(equalTo: caloriesLabel.leadingAnchor, constant: 130),
+        timeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        
+        difficultyLevelLabel.topAnchor.constraint(equalTo: imageDish.bottomAnchor, constant: 20),
+        difficultyLevelLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor, constant: 100),
+        difficultyLevelLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        
+        servesLabel.topAnchor.constraint(equalTo: imageDish.bottomAnchor, constant: 20),
+        servesLabel.leadingAnchor.constraint(equalTo: difficultyLevelLabel.leadingAnchor, constant: 90),
+        servesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        
+        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        tableView.topAnchor.constraint(equalTo: imageDish.bottomAnchor,constant: 68),
+        tableView.bottomAnchor.constraint(equalTo: recipeLabel.topAnchor, constant: 120),
+        
+        recipeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+        recipeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+        recipeLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor,constant: 50),
+        recipeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-    }
+        }
+    
+    
+//    func setupTableView() {
+//        contentView.addSubview(tableView)
+//        tableView.separatorStyle = .none
+//        tableView.allowsSelection = false
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//        NSLayoutConstraint.activate([
+////            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+////            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+////            tableView.topAnchor.constraint(equalTo: imageDish.bottomAnchor,constant: 68),
+////            tableView.bottomAnchor.constraint(equalTo: recipeLabel.topAnchor, constant: 120),
+//
+////            recipeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+////            recipeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+////            recipeLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor,constant: 50),
+////            recipeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//
+//        ])
+//    }
     
     
 }

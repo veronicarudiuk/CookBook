@@ -70,8 +70,8 @@
 		01F99E072936892000B8C335 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				869C6E32293A706B0047A408 /* RecipeDetail.swift */,
 				01F99E052936891300B8C335 /* RecipeListViewController.swift */,
+				869C6E32293A706B0047A408 /* RecipeDetail.swift */,
 				869C6E34293CD0230047A408 /* RecipeDetailCell.swift */,
 			);
 			path = View;
