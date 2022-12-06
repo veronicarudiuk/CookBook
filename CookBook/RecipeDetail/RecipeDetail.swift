@@ -30,6 +30,8 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         let image = UIImageView()
         image.layer.cornerRadius = 12
         image.layer.masksToBounds = true
+        image.contentMode = .scaleAspectFill
+        //или image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
