@@ -42,7 +42,7 @@ final class RecipeTableCell: UITableViewCell {
     let imageCell: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "loading")
-        imageView.contentMode = .scaleAspectFill
+        imageView.sizeToFit()
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         
