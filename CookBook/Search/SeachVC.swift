@@ -74,13 +74,17 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SearchCell else { return UITableViewCell() }
         
-        cell.titleLbl.text = searchResults[indexPath.row].title
+        if let recipeTitle = searchResults[safe: indexPath.row] {
+            cell.titleLbl.text = recipeTitle.title
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(searchResults[indexPath.row].id)
-        print(searchResults[indexPath.row].title)
+        if let recipe = searchResults[safe: indexPath.row] {
+            print(recipe.id)
+            tagDidRecive(recipeID: recipe.id)
+        }
     }
 }
 
@@ -119,3 +123,11 @@ extension SearchVC {
         
     }
 }
+
+extension SearchVC: ShowPecipeDataDelegate {
+     func tagDidRecive(recipeID: Int) {
+         let vc = RecipeDetail()
+         vc.recipeID = recipeID
+         present(vc, animated: true)
+     }
+  }
