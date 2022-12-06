@@ -80,6 +80,6 @@ extension SavedRecipesCollectionView: UICollectionViewDelegateFlowLayout {
  extension SavedRecipesCollectionView {
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
           let savedRecipesList = savedRecipesModel.getSavedRecipesList()
-          showerDelegate?.tagDidRecive(recipeInfo: savedRecipesList[indexPath.row])
+          showerDelegate?.tagDidRecive(recipeID: savedRecipesList[indexPath.row].id)
       }
   }
