@@ -9,6 +9,7 @@ import UIKit
 
 final class RecipeListViewController: UIViewController {
     
+    var showerDelegate: ShowPecipeDataDelegate?
     var recipeNetworkManager = RecipeNetworkManager()
     var dataApi = [RecipeData.RecipeDescription]()
     var tag = String()
@@ -42,7 +43,13 @@ final class RecipeListViewController: UIViewController {
             mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
         ])
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = RecipeDetail()
+        vc.recipeID = dataApi[indexPath.row].id
+        present(vc, animated: true)
+    }
 }
+
 
 //MARK: - UITableViewDataSource - Load tableView data
 extension RecipeListViewController: UITableViewDataSource {
@@ -88,7 +95,7 @@ extension RecipeListViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         mainTitle.text = tag
 
@@ -121,3 +128,4 @@ extension RecipeListViewController: RecipeNetworkManagerDelegate {
         }
     }
 }
+
