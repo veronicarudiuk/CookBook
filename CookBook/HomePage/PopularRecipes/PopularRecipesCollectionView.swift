@@ -99,6 +99,6 @@ extension PopularRecipesCollectionView: RecipeNetworkManagerDelegate {
 //MARK: - ShowPecipeDataDelegate
  extension PopularRecipesCollectionView {
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          showerDelegate?.tagDidRecive(recipeInfo: cells[indexPath.row])
+          showerDelegate?.tagDidRecive(recipeID: cells[indexPath.row].id)
       }
   }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ShowPecipeDataDelegate {
-     func tagDidRecive(recipeInfo: RecipeData.RecipeDescription)
+     func tagDidRecive(recipeID: Int)
   }
 
 class HomePage: UIViewController {
@@ -98,9 +98,10 @@ class HomePage: UIViewController {
 
 //MARK: - ShowPecipeDataDelegate
 extension HomePage: ShowPecipeDataDelegate {
-     func tagDidRecive(recipeInfo: RecipeData.RecipeDescription) {
+     func tagDidRecive(recipeID: Int) {
          let vc = RecipeDetail()
-         vc.recipeID = recipeInfo.id
+         vc.recipeID = recipeID
          present(vc, animated: true)
      }
   }
+
