@@ -83,13 +83,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01F99E072936892000B8C335 /* View */ = {
+		01F99E072936892000B8C335 /* CategoryView */ = {
 			isa = PBXGroup;
 			children = (
 				01F99E052936891300B8C335 /* RecipeListViewController.swift */,
 				01E0148A2937C13F00744CA8 /* RecipeTableCell.swift */,
 			);
-			path = View;
+			path = CategoryView;
 			sourceTree = "<group>";
 		};
 		01F99E0A2936898C00B8C335 /* NetworkModel */ = {
@@ -174,7 +174,7 @@
 				AAB09CB8293A04DA00DFFF34 /* MealTypes */,
 				01F99E0A2936898C00B8C335 /* NetworkModel */,
 				AABC93FD293CC8D600C3E57E /* Search */,
-				01F99E072936892000B8C335 /* View */,
+				01F99E072936892000B8C335 /* CategoryView */,
 				58DA3E3129350C8B00AB3EFF /* LaunchScreen.storyboard */,
 				58DA3E2629350C8900AB3EFF /* AppDelegate.swift */,
 				58DA3E2829350C8900AB3EFF /* SceneDelegate.swift */,
