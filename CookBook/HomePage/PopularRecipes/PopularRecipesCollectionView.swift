@@ -12,6 +12,8 @@ final class PopularRecipesCollectionView: UICollectionView, UICollectionViewDele
     private var cells = [RecipeData.RecipeDescription]()
     private var recipeNetworkManager = RecipeNetworkManager()
     
+    var showerDelegate: ShowPecipeDataDelegate?
+    
     init() {
         
         let layout = UICollectionViewFlowLayout()
@@ -93,3 +95,10 @@ extension PopularRecipesCollectionView: RecipeNetworkManagerDelegate {
         print(error)
     }
 }
+
+//MARK: - ShowPecipeDataDelegate
+ extension PopularRecipesCollectionView {
+      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          showerDelegate?.tagDidRecive(recipeInfo: cells[indexPath.row])
+      }
+  }

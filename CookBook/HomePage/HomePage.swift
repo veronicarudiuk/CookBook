@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ShowPecipeDataDelegate {
+     func tagDidRecive(recipeInfo: RecipeData.RecipeDescription)
+  }
+
 class HomePage: UIViewController {
     
     let mainTitle: UILabel = {
@@ -48,6 +52,9 @@ class HomePage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        popularRecipesCollecrionView.showerDelegate = self
+        savedRecipesCollectionView.showerDelegate = self
+        
         view.backgroundColor = .white
         
         view.addSubview(mainTitle)
@@ -88,3 +95,12 @@ class HomePage: UIViewController {
         savedRecipesCollectionView.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
 }
+
+//MARK: - ShowPecipeDataDelegate
+extension HomePage: ShowPecipeDataDelegate {
+     func tagDidRecive(recipeInfo: RecipeData.RecipeDescription) {
+         let vc = RecipeDetail()
+         vc.recipeID = recipeInfo.id
+         present(vc, animated: true)
+     }
+  }
