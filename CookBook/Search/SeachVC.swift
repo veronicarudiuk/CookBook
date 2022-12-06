@@ -26,6 +26,8 @@ class SearchVC: UIViewController {
         tv.dataSource = self
         tv.register(SearchCell.self, forCellReuseIdentifier: "cell")
         
+        
+        
         return tv
     }()
     
@@ -65,6 +67,7 @@ class SearchVC: UIViewController {
 }
 
 
+
 extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
@@ -90,6 +93,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         if let recipe = searchResults[safe: indexPath.row] {
             print(recipe.id)
             tagDidRecive(recipeID: recipe.id)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 }
