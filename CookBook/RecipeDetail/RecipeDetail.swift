@@ -106,7 +106,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         
         recipeNetworkManager.searchRecipeById(by: recipeID) { [weak self] data in
-            print(data.title)
+            
             self!.recipeData = data
             self!.setRecipeData()
             DispatchQueue.main.async {
@@ -133,12 +133,13 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
                 }
                 
                 self.titleDish.text = recipeData.title
-                self.caloriesLabel.text = String(format:"%2.f", recipeData.nutrition.nutrients[0].amount) + " Calories"
+                guard let calories = recipeData.nutrition?.nutrients[0].amount else { return }
+                self.caloriesLabel.text = String(format:"%2.f", calories) + " Calories"
                 self.timeLabel.text = String(recipeData.readyInMinutes) + " min"
                 self.servesLabel.text = "serves " + String(recipeData.servings)
                 
 //                текст инструкции приходит с сервера с лишними символами, ниже мы их заменяем на отступы
-                var recipeInstructions = recipeData.instructions
+                guard var recipeInstructions = recipeData.instructions else { return }
                 recipeInstructions = recipeInstructions.replacingOccurrences(of: "</li><li>", with: "\n\n• ")
                 recipeInstructions = recipeInstructions.replacingOccurrences(of: "<ol><li>", with: "• ")
                 recipeInstructions = recipeInstructions.replacingOccurrences(of: "</li></ol>", with: "")
@@ -243,7 +244,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            tableView.heightAnchor.constraint(equalToConstant: (15 * 40)),
+            tableView.heightAnchor.constraint(equalToConstant: CGFloat(((recipeData?.extendedIngredients.count ?? 15) * 40))),
         ])
     }
     
@@ -285,7 +286,7 @@ extension RecipeDetail: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeDetailCell", for: indexPath) as? RecipeDetailCell else { fatalError() }
         if let data = recipeData {
-            cell.ingredientsCountLabel.text = String(data.extendedIngredients[indexPath.row].amount)
+            cell.ingredientsCountLabel.text = String(format:"%2.1f", data.extendedIngredients[indexPath.row].amount) + " " + (data.extendedIngredients[indexPath.row].unit ?? "")
             cell.ingredientsLabel.text = data.extendedIngredients[indexPath.row].name
         }
         return cell
