@@ -57,6 +57,22 @@ struct RecipeNetworkManager {
         }.resume()
     }
     
+    //MARK: - searchRecipeById
+    func searchRecipeById(by id: Int, results: @escaping (RecipeData.RecipeDescription) -> Void) {
+        let urlString = "https://api.spoonacular.com/recipes/\(id)/information?includeNutrition=true&apiKey=\(ApiKey.api.rawValue)"
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard error == nil else { return }
+            guard let data = data else { return }
+            do {
+                let data = try JSONDecoder().decode(RecipeData.RecipeDescription.self, from: data)
+                results(data)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
     //MARK: - Private current URL method
     private func currentUrl(_ forRequest: RequestType, tag: String? = nil) -> String {
         var url = String()
