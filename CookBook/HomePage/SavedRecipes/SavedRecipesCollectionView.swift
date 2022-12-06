@@ -11,6 +11,7 @@ final class SavedRecipesCollectionView: UICollectionView, UICollectionViewDelega
     
     static let shared = SavedRecipesCollectionView()
     private var savedRecipesModel = SavedRecipesModel()
+    var showerDelegate: ShowPecipeDataDelegate?
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -74,3 +75,11 @@ extension SavedRecipesCollectionView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 124, height: 190)
     }
 }
+
+//MARK: - ShowPecipeDataDelegate
+ extension SavedRecipesCollectionView {
+      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          let savedRecipesList = savedRecipesModel.getSavedRecipesList()
+          showerDelegate?.tagDidRecive(recipeInfo: savedRecipesList[indexPath.row])
+      }
+  }

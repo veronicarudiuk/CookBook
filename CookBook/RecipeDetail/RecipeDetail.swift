@@ -109,7 +109,9 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
             
             self!.recipeData = data
             self!.setRecipeData()
+            
             DispatchQueue.main.async {
+                self!.setupTableView()
                 self!.tableView.reloadData()
             }
         }
@@ -121,7 +123,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         
         if let recipeData = recipeData {
             DispatchQueue.main.async {
-            
+                
                 if let dishImage = recipeData.image {
                     guard let apiURL = URL(string: dishImage) else { return }
                     URLSession.shared.dataTask(with: apiURL) { data, _, _ in
@@ -139,11 +141,8 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
                 self.servesLabel.text = "serves " + String(recipeData.servings)
                 
 //                текст инструкции приходит с сервера с лишними символами, ниже мы их заменяем на отступы
-                guard var recipeInstructions = recipeData.instructions else { return }
-                recipeInstructions = recipeInstructions.replacingOccurrences(of: "</li><li>", with: "\n\n• ")
-                recipeInstructions = recipeInstructions.replacingOccurrences(of: "<ol><li>", with: "• ")
-                recipeInstructions = recipeInstructions.replacingOccurrences(of: "</li></ol>", with: "")
-                self.recipeDescription.text = recipeInstructions
+                guard let recipeInstructions = recipeData.instructions else { return }
+                self.recipeDescription.text = recipeInstructions.htmlToString
                 
 //                в зависимости от времени готовки, присваиваем степень тяжести рецепта
                 switch recipeData.readyInMinutes {
@@ -201,7 +200,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         contentView.addSubview(recipeDescription)
         
         NSLayoutConstraint.activate([
-            titleDish.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleDish.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleDish.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleDish.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -241,11 +240,12 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         
         contentView.addSubview(tableView)
         
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            tableView.heightAnchor.constraint(equalToConstant: CGFloat(((recipeData?.extendedIngredients.count ?? 15) * 40))),
-        ])
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        if let data = recipeData {
+            tableView.heightAnchor.constraint(equalToConstant: CGFloat(((data.extendedIngredients.count ) * 40))).isActive = true
+        }
+        
     }
     
 //    настройка вью с индикатором загрузки (отображается перед загрузкой данных с сервера)
@@ -297,5 +297,3 @@ extension RecipeDetail: UITableViewDataSource {
         return 40
     }
 }
-
-
