@@ -36,6 +36,14 @@ class SearchVC: UIViewController {
         return search
     }()
     
+    let searchStub: UILabel = {
+        let label = UILabel()
+        label.text = "Let's find the tastiest recipe 🍕"
+        label.font = UIFont(name: "Poppins SemiBold", size: 24)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,6 +88,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
 //MARK: - Update TableView by searchResults
 extension SearchVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchResults.isEmpty { searchStub.removeFromSuperview() }
         if searchText != "" {
             
             recipeNetworkManager.searchRecipe(by: searchText) { [weak self] data in
@@ -102,5 +111,11 @@ extension SearchVC {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        tableView.addSubview(searchStub)
+
+        searchStub.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        searchStub.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
     }
 }
