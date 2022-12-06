@@ -9,7 +9,13 @@ import UIKit
 
 class SearchVC: UIViewController {
     
-    var searchResults = [SearchData]()
+    var searchResults = [SearchData]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+    }
+    }
     
     var recipeNetworkManager = RecipeNetworkManager()
     
@@ -97,10 +103,6 @@ extension SearchVC: UISearchBarDelegate {
             
             recipeNetworkManager.searchRecipe(by: searchText) { [weak self] data in
                 self?.searchResults = data
-            }
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
             }
         }
     }
