@@ -22,7 +22,7 @@ extension RecipeData {
         let servings: Int
         let extendedIngredients: [Ingredients]
         let dishTypes: [String]?
-        let nutrition: NutritionInfo
+        let nutrition: NutritionInfo?
     }
     
     //MARK: - extendedIngredients
