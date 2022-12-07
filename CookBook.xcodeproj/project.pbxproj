@@ -28,6 +28,7 @@
 		58F9C935293A147000CD6C57 /* SavedRecipesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F9C934293A147000CD6C57 /* SavedRecipesModel.swift */; };
 		869C6E33293A706B0047A408 /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C6E32293A706B0047A408 /* RecipeDetail.swift */; };
 		869C6E35293CD0230047A408 /* RecipeDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C6E34293CD0230047A408 /* RecipeDetailCell.swift */; };
+		AA804414293FA73E007E9653 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA804413293FA73E007E9653 /* CollectionExtension.swift */; };
 		AAB09CBB293A04F500DFFF34 /* MealTypesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CBA293A04F500DFFF34 /* MealTypesData.swift */; };
 		AAB09CBD293A090F00DFFF34 /* MealTypesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CBC293A090F00DFFF34 /* MealTypesVC.swift */; };
 		AAB09CC0293A096000DFFF34 /* MealTypesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB09CBF293A096000DFFF34 /* MealTypesCollectionView.swift */; };
@@ -61,6 +62,7 @@
 		58F9C934293A147000CD6C57 /* SavedRecipesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesModel.swift; sourceTree = "<group>"; };
 		869C6E32293A706B0047A408 /* RecipeDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
 		869C6E34293CD0230047A408 /* RecipeDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailCell.swift; sourceTree = "<group>"; };
+		AA804413293FA73E007E9653 /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		AAB09CBA293A04F500DFFF34 /* MealTypesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypesData.swift; sourceTree = "<group>"; };
 		AAB09CBC293A090F00DFFF34 /* MealTypesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypesVC.swift; sourceTree = "<group>"; };
 		AAB09CBF293A096000DFFF34 /* MealTypesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypesCollectionView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				58367355293F91BA002CA4AC /* StringExtension.swift */,
+				AA804413293FA73E007E9653 /* CollectionExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				AAB09CBB293A04F500DFFF34 /* MealTypesData.swift in Sources */,
 				58A4EE1D29364B5D00FE17B9 /* PopularRecipesCollectionView.swift in Sources */,
 				AAB09CC6293A622300DFFF34 /* TabBar.swift in Sources */,
+				AA804414293FA73E007E9653 /* CollectionExtension.swift in Sources */,
 				AABC93FF293CC92700C3E57E /* SeachVC.swift in Sources */,
 				AAB09CBD293A090F00DFFF34 /* MealTypesVC.swift in Sources */,
 				58A4EE1F29364FD100FE17B9 /* PopularRecipesCell.swift in Sources */,

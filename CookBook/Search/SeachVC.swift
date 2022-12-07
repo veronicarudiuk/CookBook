@@ -7,9 +7,17 @@
 
 import UIKit
 
+
 class SearchVC: UIViewController {
     
-    var searchResults = [SearchData]()
+    var searchResults = [SearchData]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.noSearchResult.isHidden = self.searchResults.count != 0
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     var recipeNetworkManager = RecipeNetworkManager()
     
@@ -19,6 +27,8 @@ class SearchVC: UIViewController {
         tv.delegate = self
         tv.dataSource = self
         tv.register(SearchCell.self, forCellReuseIdentifier: "cell")
+        
+        
         
         return tv
     }()
@@ -36,13 +46,26 @@ class SearchVC: UIViewController {
         return search
     }()
     
-    let searchStub: UILabel = {
+    var searchStub: UILabel = {
         let label = UILabel()
         label.text = "Let's find the tastiest recipe 🍕"
         label.font = UIFont(name: "Poppins SemiBold", size: 24)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    var noSearchResult: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 4
+        label.text = "We don't have the recipes\nyou're looking for.\n\nTry looking for another 🔎"
+        label.font = UIFont(name: "Poppins SemiBold", size: 24)
+        label.textAlignment = .center
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +80,7 @@ class SearchVC: UIViewController {
         setupElements()
     }
 }
+
 
 
 extension SearchVC: UITableViewDelegate, UITableViewDataSource {
@@ -74,13 +98,17 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SearchCell else { return UITableViewCell() }
         
-        cell.titleLbl.text = searchResults[indexPath.row].title
+        if let recipeTitle = searchResults[safe: indexPath.row] {
+            cell.titleLbl.text = recipeTitle.title
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(searchResults[indexPath.row].id)
-        print(searchResults[indexPath.row].title)
+        if let recipe = searchResults[safe: indexPath.row] {
+            tagDidRecive(recipeID: recipe.id)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 
@@ -93,10 +121,6 @@ extension SearchVC: UISearchBarDelegate {
             
             recipeNetworkManager.searchRecipe(by: searchText) { [weak self] data in
                 self?.searchResults = data
-            }
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
             }
         }
     }
@@ -113,9 +137,22 @@ extension SearchVC {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         tableView.addSubview(searchStub)
-
+        
         searchStub.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         searchStub.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
+        tableView.addSubview(noSearchResult)
+        
+        noSearchResult.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noSearchResult.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+    }
+}
+
+extension SearchVC: ShowPecipeDataDelegate {
+    func tagDidRecive(recipeID: Int) {
+        let vc = RecipeDetail()
+        vc.recipeID = recipeID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
