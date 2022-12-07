@@ -46,7 +46,7 @@ final class RecipeListViewController: UIViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RecipeDetail()
         vc.recipeID = dataApi[indexPath.row].id
-        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
