@@ -13,7 +13,7 @@ class SearchVC: UIViewController {
     var searchResults = [SearchData]() {
         didSet {
             DispatchQueue.main.async {
-                self.noSearchResult.isHidden = self.searchResults.count != 0
+                self.noSearchResult.isHidden = !self.searchResults.isEmpty
                 self.tableView.reloadData()
             }
         }
