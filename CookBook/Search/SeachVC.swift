@@ -153,6 +153,6 @@ extension SearchVC: ShowPecipeDataDelegate {
     func tagDidRecive(recipeID: Int) {
         let vc = RecipeDetail()
         vc.recipeID = recipeID
-        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
