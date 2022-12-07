@@ -64,7 +64,7 @@ extension RecipeListViewController: UITableViewDataSource {
             cell.ingredientsLabel.text = "\(dataApi[indexPath.row].extendedIngredients.count) Ingredients"
             cell.timeLabel.text = "\(dataApi[indexPath.row].readyInMinutes) min"
 
-            cell.data = [dataApi[indexPath.row]]
+            cell.data = dataApi[indexPath.row]
             cell.savedRecipesModel.setSaveButtonImage(button: cell.saveButton, recipeID: dataApi[indexPath.row].id)
             
             if let dishImage = dataApi[indexPath.row].image {
