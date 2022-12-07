@@ -54,7 +54,7 @@ final class RecipeListViewController: UIViewController {
 //MARK: - UITableViewDataSource - Load tableView data
 extension RecipeListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        dataApi.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
