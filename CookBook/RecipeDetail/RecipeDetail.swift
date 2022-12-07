@@ -30,6 +30,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         let image = UIImageView()
         image.layer.cornerRadius = 12
         image.layer.masksToBounds = true
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -140,9 +141,12 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
                 self.timeLabel.text = String(recipeData.readyInMinutes) + " min"
                 self.servesLabel.text = "serves " + String(recipeData.servings)
                 
-//                текст инструкции приходит с сервера с лишними символами, ниже мы их заменяем на отступы
-                guard let recipeInstructions = recipeData.instructions else { return }
-                self.recipeDescription.text = recipeInstructions.htmlToString
+//                текст инструкции приходит с сервера с лишними символами, ниже мы их заменяем на отступы. Если нет инструкции, то меняем instructionLabel
+                if let recipeInstructions = recipeData.instructions {
+                    self.recipeDescription.text = recipeInstructions.htmlToString
+                } else {
+                    self.instructionLabel.text = "No instruction 🥲"
+                }
                 
 //                в зависимости от времени готовки, присваиваем степень тяжести рецепта
                 switch recipeData.readyInMinutes {
