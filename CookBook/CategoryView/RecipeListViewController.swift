@@ -46,7 +46,7 @@ final class RecipeListViewController: UIViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RecipeDetail()
         vc.recipeID = dataApi[indexPath.row].id
-        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -54,11 +54,12 @@ final class RecipeListViewController: UIViewController {
 //MARK: - UITableViewDataSource - Load tableView data
 extension RecipeListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        dataApi.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableCell", for: indexPath) as? RecipeTableCell else { fatalError() }
+        cell.selectionStyle = .none
         if dataApi.count > 0 {
             cell.titleLabel.text = dataApi[indexPath.row].title
             cell.ingredientsLabel.text = "\(dataApi[indexPath.row].extendedIngredients.count) Ingredients"
