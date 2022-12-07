@@ -38,7 +38,7 @@ final class RecipeListViewController: UIViewController {
         view.addSubview(mainTitle)
         
         NSLayoutConstraint.activate([
-            mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+            mainTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 19),
             mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -19),
         ])
@@ -47,6 +47,11 @@ final class RecipeListViewController: UIViewController {
         let vc = RecipeDetail()
         vc.recipeID = dataApi[indexPath.row].id
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -64,6 +69,7 @@ extension RecipeListViewController: UITableViewDataSource {
             cell.titleLabel.text = dataApi[indexPath.row].title
             cell.ingredientsLabel.text = "\(dataApi[indexPath.row].extendedIngredients.count) Ingredients"
             cell.timeLabel.text = "\(dataApi[indexPath.row].readyInMinutes) min"
+            cell.savedRecipesModel.setSaveButtonImage(button: cell.saveButton, recipeID: dataApi[indexPath.row].id)
 
             cell.data = dataApi[indexPath.row]
             cell.savedRecipesModel.setSaveButtonImage(button: cell.saveButton, recipeID: dataApi[indexPath.row].id)
@@ -103,7 +109,7 @@ extension RecipeListViewController {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor,constant: 68),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
