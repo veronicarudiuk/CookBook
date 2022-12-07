@@ -7,7 +7,7 @@
 import UIKit
 
 final class RecipeTableCell: UITableViewCell {
-    var data = [RecipeData.RecipeDescription]()
+    var data: RecipeData.RecipeDescription?
     var savedRecipesModel = SavedRecipesModel()
     private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
@@ -112,8 +112,9 @@ final class RecipeTableCell: UITableViewCell {
     
     //MARK: - Actions
     @objc func favoriteButtonPressed(_ sender: UIButton) {
+        guard let recipeData = data else { return }
         if sender.isSelected != true {
-            savedRecipesModel.saveNewRecipe(data)
+            savedRecipesModel.saveNewRecipe(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
                 //                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
@@ -121,7 +122,7 @@ final class RecipeTableCell: UITableViewCell {
                 self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
             }
         } else {
-            savedRecipesModel.deleteRecipeFromSaved(data)
+            savedRecipesModel.deleteRecipeFromSaved(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
             }
