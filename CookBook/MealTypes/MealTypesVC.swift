@@ -69,7 +69,6 @@ extension MealTypesVC: ShowPecipesDelegate {
     func tagDidRecive(tag: String) {
         let vc = RecipeListViewController()
         vc.tag = tag
-        //navigationController?.pushViewController(vc, animated: true)
         present(vc, animated: true)
     }
     
