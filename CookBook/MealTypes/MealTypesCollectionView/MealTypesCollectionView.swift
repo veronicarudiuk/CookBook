@@ -57,7 +57,6 @@ extension MealTypesCollectionView: UICollectionViewDelegateFlowLayout {
 
 extension MealTypesCollectionView {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(mealsdata[indexPath.row].title)
         showerDelegate?.tagDidRecive(tag: mealsdata[indexPath.row].title)
 
     }

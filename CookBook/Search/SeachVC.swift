@@ -13,7 +13,7 @@ class SearchVC: UIViewController {
     var searchResults = [SearchData]() {
         didSet {
             DispatchQueue.main.async {
-                self.noSearchResult.isHidden = self.searchResults.count != 0
+                self.noSearchResult.isHidden = !self.searchResults.isEmpty
                 self.tableView.reloadData()
             }
         }
@@ -58,7 +58,7 @@ class SearchVC: UIViewController {
     var noSearchResult: UILabel = {
         let label = UILabel()
         label.numberOfLines = 4
-        label.text = "We don't have the recipes\nyou're looking for.\n\nTry looking for another 🔎"
+        label.text = "We don't have the recipes you're looking for.\n\nTry looking for another 🔎"
         label.font = UIFont(name: "Poppins SemiBold", size: 24)
         label.textAlignment = .center
         label.isHidden = true
@@ -145,6 +145,8 @@ extension SearchVC {
         
         noSearchResult.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         noSearchResult.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        noSearchResult.widthAnchor.constraint(equalToConstant: view.frame.size.width - 20).isActive = true
+        
         
     }
 }
