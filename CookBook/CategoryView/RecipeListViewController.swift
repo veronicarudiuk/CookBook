@@ -59,6 +59,7 @@ extension RecipeListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeTableCell", for: indexPath) as? RecipeTableCell else { fatalError() }
+        cell.selectionStyle = .none
         if dataApi.count > 0 {
             cell.titleLabel.text = dataApi[indexPath.row].title
             cell.ingredientsLabel.text = "\(dataApi[indexPath.row].extendedIngredients.count) Ingredients"
