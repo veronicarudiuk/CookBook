@@ -15,6 +15,8 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
     var recipeID = 653308
     var recipeData: RecipeData.RecipeDescription?
     var recipeNetworkManager = RecipeNetworkManager()
+    var savedRecipesModel = SavedRecipesModel()
+    private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     
     let tableView: UITableView = .init()
     
@@ -33,6 +35,15 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
+    }()
+    
+    let saveButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "SaveInactive"), for: .normal)
+        button.setImage(UIImage(named: "SaveActive"), for: .selected)
+        button.addTarget(target, action: #selector(keyPressed(_:)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     let caloriesLabel: UILabel = {
@@ -140,6 +151,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
                 self.caloriesLabel.text = String(format:"%2.f", calories) + " Calories"
                 self.timeLabel.text = String(recipeData.readyInMinutes) + " min"
                 self.servesLabel.text = "serves " + String(recipeData.servings)
+                self.savedRecipesModel.setSaveButtonImage(button: self.saveButton, recipeID: self.recipeID)
                 
 //                текст инструкции приходит с сервера с лишними символами, ниже мы их заменяем на отступы. Если нет инструкции, то меняем instructionLabel
                 if let recipeInstructions = recipeData.instructions {
@@ -197,6 +209,7 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         
         contentView.addSubview(titleDish)
         contentView.addSubview(imageDish)
+        contentView.addSubview(saveButton)
         contentView.addSubview(recipeDetailsStackView)
         contentView.addSubview(topHorizontalLine)
         contentView.addSubview(bottomHorizontalLine)
@@ -212,6 +225,11 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
             imageDish.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             imageDish.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             imageDish.heightAnchor.constraint(equalToConstant: 200),
+            
+            saveButton.topAnchor.constraint(equalTo: imageDish.topAnchor, constant: 8),
+            saveButton.trailingAnchor.constraint(equalTo: imageDish.trailingAnchor, constant: -8),
+            saveButton.heightAnchor.constraint(equalToConstant: 32),
+            saveButton.widthAnchor.constraint(equalToConstant: 32),
             
             recipeDetailsStackView.topAnchor.constraint(equalTo: imageDish.bottomAnchor, constant: 20),
             recipeDetailsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -271,6 +289,26 @@ class RecipeDetail: UIViewController, UITableViewDelegate {
         downloadIndicator.center = CGPoint(x: self.view.bounds.size.width / 2, y: self.view.bounds.height / 2)
         downloadingView.addSubview(downloadIndicator)
         downloadIndicator.startAnimating()
+    }
+    
+//    добавление рецепта в сохраненное по нажатию на кнопку
+    @objc func keyPressed(_ sender: UIButton) {
+        guard let recipeData = recipeData else { return }
+        if sender.isSelected != true {
+            savedRecipesModel.saveNewRecipe(recipeData)
+            DispatchQueue.main.async {
+                self.savedRecipesCollectionView.reloadData()
+//                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
+                let indexPath = IndexPath(row: self.savedRecipesModel.getSavedRecipesList().count - 1, section: 0)
+                self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+            }
+        } else {
+            savedRecipesModel.deleteRecipeFromSaved(recipeData)
+            DispatchQueue.main.async {
+                self.savedRecipesCollectionView.reloadData()
+            }
+        }
+        sender.isSelected = !sender.isSelected
     }
 }
 
