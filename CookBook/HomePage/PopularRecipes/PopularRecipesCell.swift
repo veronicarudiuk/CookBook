@@ -12,7 +12,7 @@ final class PopularRecipesCell: UICollectionViewCell {
     static let reusedID = "PopularRecipesCell"
     private var savedRecipesCollectionView = SavedRecipesCollectionView.shared
     var savedRecipesModel = SavedRecipesModel()
-    var recipeData = [RecipeData.RecipeDescription]()
+    var recipeData: RecipeData.RecipeDescription?
     
     let mainImageView: UIImageView = {
         let imageView = UIImageView()
@@ -81,11 +81,12 @@ final class PopularRecipesCell: UICollectionViewCell {
     }
     
     @objc func keyPressed(_ sender: UIButton) {
+        guard let recipeData = recipeData else { return }
         if sender.isSelected != true {
             savedRecipesModel.saveNewRecipe(recipeData)
             DispatchQueue.main.async {
                 self.savedRecipesCollectionView.reloadData()
-                //                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
+//                при добавлении большого количества рецептов коллекция автоматически скроллится до последнего
                 let indexPath = IndexPath(row: self.savedRecipesModel.getSavedRecipesList().count - 1, section: 0)
                 self.savedRecipesCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
             }

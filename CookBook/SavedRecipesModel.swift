@@ -12,18 +12,18 @@ struct SavedRecipesModel {
     
     static var savedRecipes = [RecipeData.RecipeDescription]()
     
-    mutating func saveNewRecipe(_ recipeData: [RecipeData.RecipeDescription]) {
+    mutating func saveNewRecipe(_ recipeData: RecipeData.RecipeDescription) {
         if SavedRecipesModel.savedRecipes.isEmpty {
-            SavedRecipesModel.savedRecipes = [recipeData[0]]
-        } else if SavedRecipesModel.savedRecipes.contains(where: {$0.id == recipeData[0].id}) {
+            SavedRecipesModel.savedRecipes = [recipeData]
+        } else if SavedRecipesModel.savedRecipes.contains(where: {$0.id == recipeData.id}) {
             return
         } else {
-            SavedRecipesModel.savedRecipes.append(recipeData[0])
+            SavedRecipesModel.savedRecipes.append(recipeData)
         }
     }
 
-    mutating func deleteRecipeFromSaved(_ recipeData: [RecipeData.RecipeDescription]) {
-        let recipeID = recipeData[0].id
+    mutating func deleteRecipeFromSaved(_ recipeData: RecipeData.RecipeDescription) {
+        let recipeID = recipeData.id
         SavedRecipesModel.savedRecipes.removeAll(where: {$0.id == recipeID})
     }
     
