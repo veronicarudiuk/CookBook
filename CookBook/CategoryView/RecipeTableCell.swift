@@ -41,7 +41,7 @@ final class RecipeTableCell: UITableViewCell {
     
     let imageCell: UIImageView = {
         let imageView = UIImageView()
-        imageView.sizeToFit()
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
         
