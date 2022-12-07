@@ -48,7 +48,7 @@ extension PopularRecipesCollectionView: UICollectionViewDataSource {
         cell.savedRecipesModel.setSaveButtonImage(button: cell.saveButton, recipeID: cells[indexPath.row].id)
         
         cell.recipeTitle.text = cells[indexPath.row].title
-        cell.recipeData = [cells[indexPath.row]]
+        cell.recipeData = cells[indexPath.row]
         
         if let dishesTypes = cells[indexPath.row].dishTypes {
             if dishesTypes != [] {

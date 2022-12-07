@@ -71,7 +71,7 @@ class HomePage: UIViewController {
         
         mainTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
         mainTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        mainTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16).isActive = true
+        mainTitle.trailingAnchor.constraint(equalTo: logoImage.leadingAnchor, constant: 8).isActive = true
         
         logoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
         logoImage.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -94,6 +94,12 @@ class HomePage: UIViewController {
         savedRecipesCollectionView.topAnchor.constraint(equalTo: savedRecipesTitle.bottomAnchor, constant: 16).isActive = true
         savedRecipesCollectionView.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.popularRecipesCollecrionView.reloadData()
+        }
+    }
 }
 
 //MARK: - ShowPecipeDataDelegate
@@ -101,7 +107,7 @@ extension HomePage: ShowPecipeDataDelegate {
      func tagDidRecive(recipeID: Int) {
          let vc = RecipeDetail()
          vc.recipeID = recipeID
-         present(vc, animated: true)
+         self.navigationController?.pushViewController(vc, animated: true)
      }
   }
 
